@@ -5,6 +5,7 @@ import {
   MessagesSquare,
   Rocket,
   Settings,
+  Wand2,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -23,7 +24,7 @@ const navbar = [
     path: "/playground",
   },
   {
-    logo: <Rocket className="mr-2 h-4 w-4" />,
+    logo: <Wand2 className="mr-2 h-4 w-4" />,
     text: "Spells",
     path: "/spells",
   },
