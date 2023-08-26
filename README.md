@@ -2,6 +2,9 @@
 
 Magical new abilities for your LLM with just one spell of code.
 
+- Get RAG with uploaded documents with a single line.
+- Build extended continuous memory for each user with another.
+
 ## Video Demo
 https://youtu.be/szRWfolOx84
 
