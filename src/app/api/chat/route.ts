@@ -16,8 +16,10 @@ export async function POST(req: Request) {
 
   const openai = new OpenAI({
     apiKey: env.OPENAI_API_KEY,
-    // baseURL: "https://remembrall.dev/api/openai/v1",
-    baseURL: "http://localhost:3000/api/openai/v1",
+    baseURL:
+      env.NODE_ENV === "production"
+        ? "https://remembrall.dev/api/openai/v1"
+        : "http://localhost:3000/api/openai/v1",
     defaultHeaders: headers,
   });
 
