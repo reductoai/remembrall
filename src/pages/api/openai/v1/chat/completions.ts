@@ -70,6 +70,12 @@ async function logRequest(
   console.log(res);
 }
 
+type VectorResponse = {
+  id: string;
+  content: string;
+  similarity: number;
+};
+
 export default async function handler(req: NextRequest, event: NextFetchEvent) {
   if (req.method !== "POST")
     return new Response("Method not allowed, use POST", { status: 405 });
@@ -90,8 +96,56 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
 
   const context = req.headers.get("x-gp-context");
   const persist = req.headers.get("x-gp-remember");
+  let user;
+
+  function prependSystemMessage(prependMessage: string) {
+    if (params.messages.some((message) => message.role == "system"))
+      params.messages = params.messages.map((message) => {
+        if (message.role == "system")
+          return {
+            ...message,
+            content: prependMessage + "\n\nInstructions:\n" + message.content,
+          };
+        return message;
+      });
+    else
+      params.messages = [
+        { role: "system", content: prependMessage },
+        ...params.messages,
+      ];
+  }
 
   if (persist) {
+    user = await supabaseClient
+      .from("User")
+      .select("*")
+      .match({ apiKey: apiKey })
+      .single();
+
+    const embedding = (
+      await openai.embeddings.create({
+        model: "text-embedding-ada-002",
+        input: params.messages.at(-1)?.content!,
+      })
+    ).data[0]!.embedding;
+
+    const { data: memories }: { data: VectorResponse[] | null } =
+      await supabaseClient.rpc("match_memories", {
+        query_embedding: embedding,
+        match_threshold: 0, // Choose an appropriate threshold for your data
+        match_count: 5, // Choose the number of matches
+        context_id: context,
+      });
+
+    if (memories?.length ?? 0 > 0) {
+      prependSystemMessage(
+        `Some relevant facts/context from previous interactions:\n${memories
+          ?.map(
+            (memory, idx) => `${idx + 1}. ${memory.content.replace(/\n/g, " ")}`
+          )
+          .join("\n")}`
+      );
+    }
   }
 
   if (context) {
@@ -114,13 +168,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       })
     ).data[0]!.embedding;
 
-    type Snippet = {
-      id: string;
-      content: string;
-      similarity: number;
-    };
-
-    const { data: snippets }: { data: Snippet[] | null } =
+    const { data: snippets }: { data: VectorResponse[] | null } =
       await supabaseClient.rpc("match_snippets", {
         query_embedding: embedding,
         match_threshold: 0, // Choose an appropriate threshold for your data
@@ -134,22 +182,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       )
       .join("\n");
     prependMessage += `\n${content}`;
-
-    // TODO: concatenate retrieved snippets to params.messages system prompt
-    if (params.messages.some((message) => message.role == "system"))
-      params.messages = params.messages.map((message) => {
-        if (message.role == "system")
-          return {
-            ...message,
-            content: prependMessage + "\n" + message.content,
-          };
-        return message;
-      });
-    else
-      params.messages = [
-        { role: "system", content: prependMessage },
-        ...params.messages,
-      ];
+    prependSystemMessage(prependMessage);
   }
 
   if (params.stream) {

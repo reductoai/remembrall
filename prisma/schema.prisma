@@ -52,12 +52,13 @@ model DocumentContext {
 }
 
 model Memory {
-  id        String   @id @unique @default(dbgenerated("(concat('m-', gen_random_uuid()))::TEXT"))
+  id        String                @id @unique @default(dbgenerated("(concat('m-', gen_random_uuid()))::TEXT"))
   content   String
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
   storeId   String // a unique id for the memory store
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime              @updatedAt
+  embedding Unsupported("vector")
 }
 
 model User {
