@@ -9,7 +9,6 @@ const config = {
   compiler: {
     styledComponents: true,
   },
-  output: "standalone", // Feel free to modify/remove this option
   images: {
     domains: ["avatars.githubusercontent.com"],
   },
