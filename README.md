@@ -2,7 +2,8 @@
 
 Magical new abilities for your LLM with just one spell of code.
 
-
+## Video Demo
+https://youtu.be/szRWfolOx84
 
 ## Integrate in Seconds
 ![Integrate](public/install.png)
@@ -12,7 +13,7 @@ Magical new abilities for your LLM with just one spell of code.
 
 Site is live at https://remembrall.dev but having some last min issues with authentication so it kinda only runs on localhost lol.
 
-You should be able to clone the app and run it locally without issues if you want.
+You should be able to clone the app and run it locally without issues if you want though.
 
 
 ## Built With
