@@ -63,17 +63,6 @@ async function logRequest(
     },
   });
 
-  const res = await supabaseClient.from("Request").insert([
-    {
-      model: params.model,
-      request: params as any,
-      response: response as any,
-      numTokens: response.usage!.total_tokens,
-      duration,
-      userId: user.data.id,
-    },
-  ]);
-
   if (persist) {
     const llmVersion = new OpenAIChatApi(
       { apiKey: openai.apiKey },
@@ -81,9 +70,8 @@ async function logRequest(
     );
     let history = [
       ...params.messages
-        .filter((x) => x.role === "assistant" || x.role === "user")
-        .map((message) => `${message.role}: ${message.content}`),
-      `${response.choices[0].message.role}: ${response.choices[0].message.content}`,
+        .filter((x) => x.role === "user")
+        .map((message) => `${message.content}`),
     ].join("\n");
 
     if (memories && memories.length) {
@@ -98,7 +86,7 @@ async function logRequest(
 
     const res = await completion(
       llmVersion,
-      `Given the following chat history, update or create relevant memories below that could be useful in the future. ${history}. Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places. Issues encountered, etc.`,
+      `Given the following messages from the user, update or create relevant memories below that could be useful in the future. ${history}. Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places. Issues encountered, etc. They should be very short and brief, only encoding the relevant facts. If nothing is relevant as a fact (this may happen often) just provide an empty memory list.`,
       {
         schema: z.object({ memory: memorySchema }),
       }
@@ -155,6 +143,17 @@ async function logRequest(
       })
     );
   }
+
+  const res = await supabaseClient.from("Request").insert([
+    {
+      model: params.model,
+      request: params as any,
+      response: response as any,
+      numTokens: response.usage!.total_tokens,
+      duration,
+      userId: user.data.id,
+    },
+  ]);
 }
 
 type VectorResponse = {
@@ -218,14 +217,21 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       })
     ).data[0]!.embedding;
 
-    memories = (
-      await supabaseClient.rpc("match_memories", {
-        query_embedding: embedding,
-        match_threshold: 0, // Choose an appropriate threshold for your data
-        match_count: 5, // Choose the number of matches
-        context_id: context,
-      })
-    ).data;
+    console.log("Matching context: ", context);
+
+    const memReq = await supabaseClient.rpc("match_memories", {
+      query_embedding: embedding,
+      match_threshold: 0.3, // Choose an appropriate threshold for your data
+      match_count: 5, // Choose the number of matches
+      store_id: persist,
+      user_id: user.data.id,
+    });
+
+    console.log(memReq);
+
+    memories = memReq.data;
+
+    console.log("Retrieved memories: ", memories);
 
     if (memories?.length ?? 0 > 0) {
       prependSystemMessage(
@@ -261,7 +267,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
     const { data: snippets }: { data: VectorResponse[] | null } =
       await supabaseClient.rpc("match_snippets", {
         query_embedding: embedding,
-        match_threshold: 0, // Choose an appropriate threshold for your data
+        match_threshold: 0.3, // Choose an appropriate threshold for your data
         match_count: 5, // Choose the number of matches
         context_id: context,
       });

@@ -12,7 +12,7 @@ completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   messages=[
     {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "What should I do about my cofounder?"},
+    {"role": "user", "content": "You know where I could find food nearby?"},
   ],
   headers={
     "x-gp-api-key": os.environ["GP_API_KEY"],
