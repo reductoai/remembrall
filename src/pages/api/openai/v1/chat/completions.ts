@@ -30,6 +30,18 @@ const supabaseClient = createClient(env.SUPABASE_URL, env.SUPABASE_API_KEY, {
   auth: { persistSession: false },
 });
 
+export type MemoryDiff = (
+  | {
+      type: "insert";
+      content: string;
+    }
+  | {
+      type: "update";
+      content: string;
+      replaced: string;
+    }
+)[];
+
 async function logRequest(
   openai: OpenAI,
   apiKey: string,
@@ -61,6 +73,8 @@ async function logRequest(
       Authorization: `Bearer ${env.TINYBIRD_API_KEY}`,
     },
   });
+
+  let memoryUpdate: MemoryDiff | undefined = undefined;
 
   if (persist) {
     let history = [
@@ -155,11 +169,24 @@ async function logRequest(
             .match({ id: memories![memory.id! - 1].id });
         })
       );
+
+      memoryUpdate = [
+        ...newMemories.map((m) => ({
+          type: "insert" as const,
+          content: m.content,
+        })),
+        ...existingMemories.map((m) => ({
+          type: "update" as const,
+          content: m.content,
+          replaced: memories![m.id! - 1].content,
+        })),
+      ];
     }
   }
 
   const res = await supabaseClient.from("Request").insert([
     {
+      memoryUpdate,
       model: params.model,
       request: params as any,
       response: response as any,
@@ -241,7 +268,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
 
     const memReq = await supabaseClient.rpc("match_memories", {
       query_embedding: embedding,
-      match_threshold: 0.3, // Choose an appropriate threshold for your data
+      match_threshold: 0.5, // Choose an appropriate threshold for your data
       match_count: 5, // Choose the number of matches
       store_id: persist,
       user_id: user.data.id,
@@ -287,7 +314,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
     const { data: snippets }: { data: VectorResponse[] | null } =
       await supabaseClient.rpc("match_snippets", {
         query_embedding: embedding,
-        match_threshold: 0.3, // Choose an appropriate threshold for your data
+        match_threshold: 0.5, // Choose an appropriate threshold for your data
         match_count: 5, // Choose the number of matches
         context_id: context,
       });

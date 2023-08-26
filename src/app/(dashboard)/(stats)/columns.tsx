@@ -112,11 +112,11 @@ export const columns: ColumnDef<Rows>[] = [
       const url =
         "/playground/?messages=" + encodeURIComponent(JSON.stringify(messages));
 
-      return (
-        <Link href={url} className={buttonVariants({ variant: "outline" })}>
-          <MessagesSquare className="h-4 w-4" />
-        </Link>
-      );
+      // return (
+      //   <Link href={url} className={buttonVariants({ variant: "outline" })}>
+      //     <MessagesSquare className="h-4 w-4" />
+      //   </Link>
+      // );
 
       return (
         <Sheet>
@@ -133,7 +133,7 @@ export const columns: ColumnDef<Rows>[] = [
 
             <Card>
               <CardHeader>
-                <h2>
+                <h2 className="whitespace-pre-wrap">
                   {messages.find((m: Message) => m.role === "system")
                     ?.content ?? "No system prompt provided."}
                 </h2>
