@@ -150,7 +150,7 @@ export function CreateDocContextForm({ close }: { close: () => void }) {
 }
 
 import { useRouter } from "next/navigation";
-import { createDocContextSchema } from "~/app/(dashboard)/powerups/types";
+import { createDocContextSchema } from "~/app/(dashboard)/spells/types";
 import {
   Table,
   TableBody,
@@ -198,7 +198,7 @@ export function DisplayDocContexts() {
             className="cursor-pointer"
             onClick={() => {
               console.log("Clicked", docContext.id);
-              push(`/powerups/docs/${docContext.id}`);
+              push(`/spells/docs/${docContext.id}`);
             }}
           >
             <TableCell className="font-medium">{docContext.name}</TableCell>

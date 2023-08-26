@@ -24,8 +24,8 @@ const navbar = [
   },
   {
     logo: <Rocket className="mr-2 h-4 w-4" />,
-    text: "Powerups",
-    path: "/powerups",
+    text: "Spells",
+    path: "/spells",
   },
   {
     logo: <Settings className="mr-2 h-4 w-4" />,

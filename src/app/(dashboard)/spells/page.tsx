@@ -5,11 +5,11 @@ import { FileStack, HistoryIcon } from "lucide-react";
 import {
   CreateDocContext,
   DisplayDocContexts,
-} from "~/app/(dashboard)/powerups/doc-context";
-import Remember from "~/app/(dashboard)/powerups/remember";
+} from "~/app/(dashboard)/spells/doc-context";
+import Remember from "~/app/(dashboard)/spells/remember";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 
-export default async function Powerups() {
+export default async function Spells() {
   return (
     <div className="w-full min-w-[600px]">
       <Tabs defaultValue="account" className="h-fit w-full">
