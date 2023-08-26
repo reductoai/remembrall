@@ -183,6 +183,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
   //
   const apiKey = req.headers.get("x-gp-api-key") as string;
 
+  console.log(req.headers);
   const OPENAI_API_KEY = req.headers
     .get("authorization")!
     .replace("Bearer ", "");
