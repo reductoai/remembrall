@@ -24,7 +24,7 @@ export default function LoginPage() {
         </h1>
       </CardHeader>
       <CardContent className="text-center">
-        Magical new abilities for your LLM with just one spell of code..
+        Magical new abilities for your LLM with just one spell of code.
       </CardContent>
 
       <CardFooter>
