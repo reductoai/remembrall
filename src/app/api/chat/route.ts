@@ -1,25 +1,25 @@
 // app/api/chat/route.ts
 
-import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import OpenAI from "openai";
 import { env } from "~/env.mjs";
-import { authOptions } from "../../server/auth";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 export async function POST(req: Request) {
   // Extract the `messages` from the body of the request
   const { messages, apiKey, context, remember } = await req.json();
 
+  const headers: any = { "x-gp-api-key": apiKey };
+  if (context) headers["x-gp-context"] = context;
+  if (remember) headers["x-gp-remember"] = remember;
+
   const openai = new OpenAI({
     apiKey: env.OPENAI_API_KEY,
-    baseURL: "https://remembrall.dev/api/openai/v1",
+    // baseURL: "https://remembrall.dev/api/openai/v1",
+    baseURL: "http://localhost:3000/api/openai/v1",
     defaultHeaders: {
       "x-gp-api-key": apiKey,
-      "x-gp-context": context ?? undefined,
-      "x-gp-remember": remember ?? undefined,
     },
   });
 
