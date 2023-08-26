@@ -48,14 +48,14 @@ export async function Sidebar({
         </div>
         <div className="flex flex-col space-y-4 text-sm">
           <div className="flex flex-col space-y-2">
-            <Link
+            {/* <Link
               href="/"
               className="flex flex-row items-center pl-2  text-muted-foreground hover:text-foreground"
             >
               <BookOpenIcon className="mr-2 h-4 w-4" /> Documentation
-            </Link>
+            </Link> */}
             <Link
-              href="/"
+              href="mailto:raunakdoesdev@gmail.com"
               className="flex flex-row items-center pl-2 text-muted-foreground hover:text-foreground"
             >
               <HelpCircle className="mr-2 h-4 w-4" /> Help & Support

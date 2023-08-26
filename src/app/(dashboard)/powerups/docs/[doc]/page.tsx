@@ -20,6 +20,7 @@ import { Separator } from "~/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { Textarea } from "~/components/ui/textarea";
 import { api } from "~/trpc/client";
+import { getUsersCode } from "~/app/(dashboard)/settings/code";
 
 export default function Document({ params }: { params: { doc: string } }) {
   const router = useRouter();

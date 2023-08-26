@@ -1,8 +1,23 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextFetchEvent, NextRequest } from "next/server";
 import OpenAI from "openai";
-import { v4 } from "uuid";
 import { env } from "~/env.mjs";
+import { completion } from "zod-gpt";
+import { z } from "zod";
+
+const memorySchema = z.array(
+  z.union([
+    z.object({
+      type: z.literal("edit"),
+      id: z.string().describe("The ID of the existing memory to edit"),
+      content: z.string().describe("The new value of the memory"),
+    }),
+    z.object({
+      type: z.literal("new"),
+      content: z.string().describe("The content of the memory"),
+    }),
+  ])
+);
 
 export const config = {
   runtime: "edge",
@@ -74,6 +89,10 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
     await req.json();
 
   const context = req.headers.get("x-gp-context");
+  const persist = req.headers.get("x-gp-remember");
+
+  if (persist) {
+  }
 
   if (context) {
     const contextData = await supabaseClient
