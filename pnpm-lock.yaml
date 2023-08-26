@@ -104,6 +104,9 @@ dependencies:
   framer-motion:
     specifier: ^10.16.1
     version: 10.16.1(react-dom@18.2.0)(react@18.2.0)
+  llm-api:
+    specifier: ^0.9.5
+    version: 0.9.5
   lucide-react:
     specifier: ^0.268.0
     version: 0.268.0(react@18.2.0)

@@ -4,12 +4,17 @@ import OpenAI from "openai";
 import { env } from "~/env.mjs";
 import { completion } from "zod-gpt";
 import { z } from "zod";
+import { OpenAIChatApi } from "llm-api";
 
 const memorySchema = z.array(
   z.union([
     z.object({
       type: z.literal("edit"),
-      id: z.string().describe("The ID of the existing memory to edit"),
+      memoryNumber: z
+        .number()
+        .describe(
+          "The number of of the existing memory to edit (starting from 1)"
+        ),
       content: z.string().describe("The new value of the memory"),
     }),
     z.object({
@@ -28,10 +33,13 @@ const supabaseClient = createClient(env.SUPABASE_URL, env.SUPABASE_API_KEY, {
 });
 
 async function logRequest(
+  openai: OpenAI,
   apiKey: string,
   params: OpenAI.Chat.Completions.CompletionCreateParams,
   response: OpenAI.Chat.Completions.ChatCompletion,
-  duration: number
+  duration: number,
+  persist: string | null,
+  memories: VectorResponse[] | null
 ) {
   const user = await supabaseClient
     .from("User")
@@ -67,7 +75,33 @@ async function logRequest(
     },
   ]);
 
-  console.log(res);
+  if (persist) {
+    const llmVersion = new OpenAIChatApi({ apiKey: openai.apiKey });
+    let history = [
+      ...params.messages
+        .filter((x) => x.role === "assistant" || x.role === "user")
+        .map((message) => `${message.role}: ${message.content}`),
+      `${response.choices[0].message.role}: ${response.choices[0].message.content}`,
+    ].join("\n");
+
+    if (memories && memories.length) {
+      history += `\n\nExisting memories that you may choose to modify:\n${memories
+        .map((m, idx) => {
+          return `${idx + 1}. ${m.content.replace(/\n/g, " ")}`;
+        })
+        .join("\n")}`;
+    }
+
+    const res = await completion(
+      llmVersion,
+      `Given the following chat history, update or create relevant memories below that could be useful in the future. ${history}. Memories are facts that the user has provided that would be useful to remember for future conversations.`,
+      {
+        schema: memorySchema,
+      }
+    );
+
+    console.log("Memory response: ", res);
+  }
 }
 
 type VectorResponse = {
@@ -115,6 +149,8 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       ];
   }
 
+  let memories: VectorResponse[] | null = null;
+
   if (persist) {
     user = await supabaseClient
       .from("User")
@@ -129,13 +165,14 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       })
     ).data[0]!.embedding;
 
-    const { data: memories }: { data: VectorResponse[] | null } =
+    memories = (
       await supabaseClient.rpc("match_memories", {
         query_embedding: embedding,
         match_threshold: 0, // Choose an appropriate threshold for your data
         match_count: 5, // Choose the number of matches
         context_id: context,
-      });
+      })
+    ).data;
 
     if (memories?.length ?? 0 > 0) {
       prependSystemMessage(
@@ -211,7 +248,17 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       params as OpenAI.Chat.Completions.CompletionCreateParamsNonStreaming
     );
 
-    event.waitUntil(logRequest(apiKey, params, response, +new Date() - start));
+    event.waitUntil(
+      logRequest(
+        openai,
+        apiKey,
+        params,
+        response,
+        +new Date() - start,
+        persist,
+        memories
+      )
+    );
 
     return new Response(JSON.stringify(response), {
       headers: {

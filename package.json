@@ -43,6 +43,7 @@
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.1",
+    "llm-api": "^0.9.5",
     "lucide-react": "^0.268.0",
     "markdown-it": "^13.0.1",
     "next": "13.4.19",

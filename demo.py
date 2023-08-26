@@ -13,11 +13,12 @@ completion = openai.ChatCompletion.create(
   messages=[
     {"role": "system", "content": "You are a helpful assistant."},
     # {"role": "assistant", "content": "Hey friendo what can I do for ya?"},
-    {"role": "user", "content": "What are the partnership benefits?"},
+    {"role": "user", "content": "I'm strugging to deal with my cofounder David."},
   ],
   headers={
     "x-gp-api-key": os.environ["GP_API_KEY"],
-    "x-gp-context": "dc-4f6a820c-0d53-407d-ab4d-653347c68a26"
+    # "x-gp-context": "dc-4f6a820c-0d53-407d-ab4d-653347c68a26",
+    "x-gp-remember": "raunak",
   },
 )
 
