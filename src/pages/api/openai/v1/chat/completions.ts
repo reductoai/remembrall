@@ -209,11 +209,6 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
   if (req.method !== "POST")
     return new Response("Method not allowed, use POST", { status: 405 });
 
-  // print all headers
-  for (const [key, value] of req.headers.entries()) {
-    console.log(`${key}: ${value}`);
-  }
-
   //
   const apiKey = req.headers.get("x-gp-api-key") as string;
 

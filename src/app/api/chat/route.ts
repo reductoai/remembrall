@@ -18,9 +18,7 @@ export async function POST(req: Request) {
     apiKey: env.OPENAI_API_KEY,
     // baseURL: "https://remembrall.dev/api/openai/v1",
     baseURL: "http://localhost:3000/api/openai/v1",
-    defaultHeaders: {
-      "x-gp-api-key": apiKey,
-    },
+    defaultHeaders: headers,
   });
 
   // Request the OpenAI API for the response based on the prompt
