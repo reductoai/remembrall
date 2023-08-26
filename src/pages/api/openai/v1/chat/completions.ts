@@ -5,23 +5,22 @@ import { env } from "~/env.mjs";
 import { completion } from "zod-gpt";
 import { z } from "zod";
 import { OpenAIChatApi } from "llm-api";
+import { v4 } from "uuid";
 
 const memorySchema = z.array(
-  z.union([
-    z.object({
-      type: z.literal("edit"),
-      memoryNumber: z
-        .number()
-        .describe(
-          "The number of of the existing memory to edit (starting from 1)"
-        ),
-      content: z.string().describe("The new value of the memory"),
-    }),
-    z.object({
-      type: z.literal("new"),
-      content: z.string().describe("The content of the memory"),
-    }),
-  ])
+  z.object({
+    memoryNumber: z
+      .number()
+      .describe(
+        "The number of of the existing memory to edit if you would like to edit an exisitng memory (starting from 1). Omit this field if you are creating a new memory."
+      )
+      .optional(),
+    content: z
+      .string()
+      .describe(
+        "The value of the memory (if memoryNumber specified this will replace the existing memory"
+      ),
+  })
 );
 
 export const config = {
@@ -76,7 +75,10 @@ async function logRequest(
   ]);
 
   if (persist) {
-    const llmVersion = new OpenAIChatApi({ apiKey: openai.apiKey });
+    const llmVersion = new OpenAIChatApi(
+      { apiKey: openai.apiKey },
+      { model: "gpt-3.5-turbo-0613" }
+    );
     let history = [
       ...params.messages
         .filter((x) => x.role === "assistant" || x.role === "user")
@@ -90,17 +92,68 @@ async function logRequest(
           return `${idx + 1}. ${m.content.replace(/\n/g, " ")}`;
         })
         .join("\n")}`;
+    } else {
+      history += `\n\nNo existing memories found.`;
     }
 
     const res = await completion(
       llmVersion,
-      `Given the following chat history, update or create relevant memories below that could be useful in the future. ${history}. Memories are facts that the user has provided that would be useful to remember for future conversations.`,
+      `Given the following chat history, update or create relevant memories below that could be useful in the future. ${history}. Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places. Issues encountered, etc.`,
       {
-        schema: memorySchema,
+        schema: z.object({ memory: memorySchema }),
       }
     );
 
-    console.log("Memory response: ", res);
+    const updates = await Promise.all(
+      res.data.memory.map(async (memory) => {
+        const embedding = (
+          await openai.embeddings.create({
+            model: "text-embedding-ada-002",
+            input: memory.content,
+          })
+        ).data[0]!.embedding;
+
+        if (
+          memory.memoryNumber &&
+          memory.memoryNumber > (memories?.length ?? 0)
+        )
+          memory.memoryNumber = undefined;
+
+        return {
+          content: memory.content,
+          id: memory.memoryNumber,
+          userId: user.data.id,
+          storeId: persist,
+          updatedAt: new Date(Date.now()),
+          embedding,
+        };
+      })
+    );
+
+    // insert new memories (without memoryNumber) with supabase
+    const newMemories = updates.filter((memory) => !memory.id);
+    const insert = await supabaseClient.from("Memory").insert(
+      newMemories.map((m) => {
+        return { ...m, id: v4() };
+      })
+    );
+
+    console.log("insert", insert);
+
+    // update existing memories (with memoryNumber) with supabase
+    const existingMemories = updates.filter((memory) => memory.id);
+    await Promise.all(
+      existingMemories.map(async (memory) => {
+        await supabaseClient
+          .from("Memory")
+          .update({
+            content: memory.content,
+            embedding: memory.embedding,
+            updatedAt: memory.updatedAt,
+          })
+          .match({ id: memories![memory.id! - 1].id });
+      })
+    );
   }
 }
 
