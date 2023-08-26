@@ -25,7 +25,15 @@ import {
 } from "~/components/ui/card";
 import { Separator } from "~/components/ui/separator";
 import colors from "tailwindcss/colors";
-import { MessagesSquare } from "lucide-react";
+import {
+  ArrowLeftRight,
+  ArrowRight,
+  MessagesSquare,
+  MinusIcon,
+  PlusIcon,
+} from "lucide-react";
+import type { MemoryDiff } from "~/pages/api/openai/v1/chat/completions";
+import { Alert, AlertTitle } from "~/components/ui/alert";
 
 type Rows = RouterOutputs["stats"]["getRequestsRaw"][0];
 type Message = OpenAI.Chat.Completions.ChatCompletionMessage;
@@ -74,6 +82,12 @@ export const columns: ColumnDef<Rows>[] = [
     header: "Duration (ms)",
     accessorKey: "duration",
   },
+  // {
+  //   header: "Delta",
+  //   cell: ({ row }) => {
+  //     return <pre>{JSON.stringify(row.original.memoryUpdate)}</pre>;
+  //   },
+  // },
   {
     header: "Prompt",
     accessorKey: "request",
@@ -130,7 +144,6 @@ export const columns: ColumnDef<Rows>[] = [
                 Make changes to your profile here. Click save when you're done.
               </SheetDescription> */}
             </SheetHeader>
-
             <Card>
               <CardHeader>
                 <h2 className="whitespace-pre-wrap">
@@ -175,6 +188,26 @@ export const columns: ColumnDef<Rows>[] = [
                 </Link>
               </CardFooter>
             </Card>
+            {(row.original.memoryUpdate as MemoryDiff | null)?.map(
+              (delta, idx) =>
+                delta.type === "insert" ? (
+                  <Alert
+                    key={idx}
+                    className="my-2 border-green-700 bg-green-50"
+                  >
+                    <PlusIcon className="h-4 w-4" />
+                    <AlertTitle>{delta.content}</AlertTitle>
+                  </Alert>
+                ) : (
+                  <Alert key={idx} className="my-2 border-red-700 bg-red-50">
+                    <ArrowLeftRight className="h-4 w-4" />
+                    <AlertTitle className="flex flex-row items-center">
+                      {delta.replaced} <ArrowRight className="mx-2 h-4 w-4" />{" "}
+                      {delta.content}
+                    </AlertTitle>
+                  </Alert>
+                )
+            )}
           </SheetContent>
         </Sheet>
       );

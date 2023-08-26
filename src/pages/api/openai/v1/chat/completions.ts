@@ -99,7 +99,7 @@ async function logRequest(
       messages: [
         {
           role: "system",
-          content: `Given the messages from the user, update or create relevant memories below that could be useful in the future. Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places. Issues encountered, etc. They should be very short and brief, only encoding the relevant facts. If nothing is relevant as a fact (this may happen often) just provide an empty memory list.`,
+          content: `Given the messages from the user, update or create relevant memories below that could be useful in the future. Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places. Issues encountered, etc. They should be very short and brief, only encoding the relevant facts. If nothing is relevant as a fact (this may happen often) just provide an empty memory list. Only modify facts that are relevant to the conversation.`,
         },
         { role: "user", content: "History to generate facts for: " + history },
       ],

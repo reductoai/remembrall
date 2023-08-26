@@ -6,7 +6,6 @@ import { env } from "~/env.mjs";
 
 export const config = {
   runtime: "edge",
-  unstable_allowDynamic: ["/node_modules/.pnpm/lodash*/**"],
 };
 
 const openai = new OpenAI({
