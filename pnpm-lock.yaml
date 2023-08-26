@@ -101,6 +101,9 @@ dependencies:
   date-fns:
     specifier: ^2.30.0
     version: 2.30.0
+  eventsource-parser:
+    specifier: ^1.0.0
+    version: 1.0.0
   framer-motion:
     specifier: ^10.16.1
     version: 10.16.1(react-dom@18.2.0)(react@18.2.0)
@@ -137,6 +140,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.45.4
     version: 7.45.4(react@18.2.0)
+  readable-stream-clone:
+    specifier: ^0.0.7
+    version: 0.0.7
   remark-gfm:
     specifier: ^3.0.1
     version: 3.0.1
@@ -5198,6 +5204,10 @@ packages:
     resolution: {integrity: sha512-yILWifhaSEEytfXI76kB9xEEiG1AiozaCJZ83A87ytjRiN+jVibXjedjCRNjoZviinhG+4UkalO3mWTd8u5O0Q==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: true
+
+  /readable-stream-clone@0.0.7:
+    resolution: {integrity: sha512-mdkQtdg5elliOR64xcHVMkghSHQGjpsdCFAs6fSe28wTaVypR0GywmK5ndKpOSQzzuNpSrzC12Rv9UEkDLX73A==}
+    dev: false
 
   /readdirp@3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}

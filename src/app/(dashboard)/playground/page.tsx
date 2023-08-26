@@ -16,7 +16,7 @@ export default function Playground() {
   const loadedMessages = searchParams?.get("messages");
 
   const { handleSubmit, messages, input, handleInputChange } = useChat({
-    api: "/api/openai/v1/chat/completions",
+    api: "/api/chat",
     initialMessages: loadedMessages
       ? JSON.parse(loadedMessages).map((m: any) => ({ ...m, id: v4() }))
       : [

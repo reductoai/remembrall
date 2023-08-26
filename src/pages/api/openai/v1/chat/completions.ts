@@ -1,6 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
+import { createParser } from "eventsource-parser";
 import { NextFetchEvent, NextRequest } from "next/server";
 import OpenAI from "openai";
+import { ChatCompletion, ChatCompletionChunk } from "openai/resources/chat";
 import { v4 } from "uuid";
 import * as z from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
@@ -329,6 +331,8 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
   }
 
   if (params.stream) {
+    params.temperature = 0; // enforce consistency
+
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       headers: {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
@@ -342,6 +346,29 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       const err = await response.json();
       throw new Error(err.error.message);
     }
+
+    // TODO: Don't duplicate this request
+    event.waitUntil(
+      (async () => {
+        const start = +new Date();
+        params.stream = false;
+        const res = await openai.chat.completions.create(
+          params as OpenAI.Chat.Completions.CompletionCreateParamsNonStreaming
+        );
+
+        event.waitUntil(
+          logRequest(
+            openai,
+            apiKey,
+            params,
+            res,
+            +new Date() - start,
+            persist,
+            memories
+          )
+        );
+      })()
+    );
 
     return new Response(response.body, {
       headers: {
