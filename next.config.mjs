@@ -13,6 +13,7 @@ const config = {
   images: {
     domains: ["avatars.githubusercontent.com"],
   },
+
   async headers() {
     return [
       {
