@@ -3,18 +3,25 @@
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { env } from "~/env.mjs";
+import { authOptions } from "../../server/auth";
 
 export const config = {
   runtime: "edge",
 };
 
-const openai = new OpenAI({
-  apiKey: env.OPENAI_API_KEY,
-});
-
 export async function POST(req: Request) {
   // Extract the `messages` from the body of the request
-  const { messages } = await req.json();
+  const { messages, apiKey, context, remember } = await req.json();
+
+  const openai = new OpenAI({
+    apiKey: env.OPENAI_API_KEY,
+    baseURL: "https://remembrall.dev/api/openai/v1",
+    defaultHeaders: {
+      "x-gp-api-key": apiKey,
+      "x-gp-context": context ?? undefined,
+      "x-gp-remember": remember ?? undefined,
+    },
+  });
 
   // Request the OpenAI API for the response based on the prompt
   const response = await openai.chat.completions.create({
