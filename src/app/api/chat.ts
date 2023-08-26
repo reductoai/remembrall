@@ -6,9 +6,7 @@ import { env } from "~/env.mjs";
 
 export const config = {
   runtime: "edge",
-  unstable_allowDynamic: [
-    "**/node_modules/.pnpm/lodash/**/_root.js", // use a glob to allow anything in the function-bind 3rd party module
-  ],
+  unstable_allowDynamic: ["/node_modules/.pnpm/lodash*/**"],
 };
 
 const openai = new OpenAI({
