@@ -1,4 +1,5 @@
 import { preWrapperPlugin } from "~/lib/markdown/preWrapperPlugin";
+import * as sdf from "shiki";
 import MarkdownIt from "markdown-it";
 import {
   createDiffProcessor,
