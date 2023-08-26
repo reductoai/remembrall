@@ -62,7 +62,7 @@
     "ts-pattern": "^5.0.5",
     "uuid": "^9.0.0",
     "zod": "^3.21.4",
-    "zod-gpt": "^0.7.2"
+    "zod-to-json-schema": "^3.21.4"
   },
   "devDependencies": {
     "@headlessui/tailwindcss": "^0.2.0",

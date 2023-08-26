@@ -161,9 +161,9 @@ dependencies:
   zod:
     specifier: ^3.21.4
     version: 3.21.4
-  zod-gpt:
-    specifier: ^0.7.2
-    version: 0.7.2(llm-api@0.9.5)(zod@3.21.4)
+  zod-to-json-schema:
+    specifier: ^3.21.4
+    version: 3.21.4(zod@3.21.4)
 
 devDependencies:
   '@headlessui/tailwindcss':
@@ -6140,24 +6140,6 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
-
-  /zod-gpt@0.7.2(llm-api@0.9.5)(zod@3.21.4):
-    resolution: {integrity: sha512-Ak2nmlR2a6xnPcm3JauwQJnTETg47H3Kca065sFuhTH6v6rVk+yOIuM0rFxZimDvz73T0oCX4NnVUT2Zzio0pw==}
-    peerDependencies:
-      llm-api: ^0.9.5
-      zod: ^3.21.4
-    dependencies:
-      debug: 4.3.4
-      jsonic: 1.0.1
-      jsonrepair: 3.2.0
-      llm-api: 0.9.5(encoding@0.1.13)
-      lodash: 4.17.21
-      type-fest: 3.13.1
-      zod: 3.21.4
-      zod-to-json-schema: 3.21.4(zod@3.21.4)
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /zod-to-json-schema@3.21.4(zod@3.21.4):
     resolution: {integrity: sha512-fjUZh4nQ1s6HMccgIeE0VP4QG/YRGPmyjO9sAh890aQKPEk3nqbfUXhMFaC+Dr5KvYBm8BCyvfpZf2jY9aGSsw==}

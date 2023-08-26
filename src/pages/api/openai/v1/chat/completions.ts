@@ -1,11 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextFetchEvent, NextRequest } from "next/server";
 import OpenAI from "openai";
-import { env } from "~/env.mjs";
-import { completion } from "zod-gpt";
-import { z } from "zod";
-import { OpenAIChatApi } from "llm-api";
 import { v4 } from "uuid";
+import * as z from "zod";
+import { zodToJsonSchema } from "zod-to-json-schema";
+import { env } from "~/env.mjs";
 
 const memorySchema = z.array(
   z.object({
@@ -18,7 +17,7 @@ const memorySchema = z.array(
     content: z
       .string()
       .describe(
-        "The value of the memory (if memoryNumber specified this will replace the existing memory"
+        "The value of the memory (if memoryNumber specified this will replace the existing memory)."
       ),
   })
 );
@@ -64,84 +63,99 @@ async function logRequest(
   });
 
   if (persist) {
-    const llmVersion = new OpenAIChatApi(
-      { apiKey: openai.apiKey },
-      { model: "gpt-3.5-turbo-0613" }
-    );
     let history = [
       ...params.messages
         .filter((x) => x.role === "user")
         .map((message) => `${message.content}`),
     ].join("\n");
 
+    let existing = "NO existing memories found.";
+
     if (memories && memories.length) {
-      history += `\n\nExisting memories that you may choose to modify:\n${memories
+      existing = `\n\nExisting memories that you may choose to modify:\n${memories
         .map((m, idx) => {
           return `${idx + 1}. ${m.content.replace(/\n/g, " ")}`;
         })
         .join("\n")}`;
-    } else {
-      history += `\n\nNo existing memories found.`;
     }
 
-    const res = await completion(
-      llmVersion,
-      `Given the following messages from the user, update or create relevant memories below that could be useful in the future. ${history}. Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places. Issues encountered, etc. They should be very short and brief, only encoding the relevant facts. If nothing is relevant as a fact (this may happen often) just provide an empty memory list.`,
-      {
-        schema: z.object({ memory: memorySchema }),
-      }
-    );
+    const memoryCall = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo-0613",
+      temperature: 0.2,
+      messages: [
+        {
+          role: "system",
+          content: `Given the messages from the user, update or create relevant memories below that could be useful in the future. Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places. Issues encountered, etc. They should be very short and brief, only encoding the relevant facts. If nothing is relevant as a fact (this may happen often) just provide an empty memory list.`,
+        },
+        { role: "user", content: "History to generate facts for: " + history },
+      ],
+      functions: [
+        {
+          name: "update_memory",
+          description: "Always call this function to submit your memories.",
+          parameters: zodToJsonSchema(z.object({ memory: memorySchema })),
+        },
+      ],
+    });
 
-    const updates = await Promise.all(
-      res.data.memory.map(async (memory) => {
-        const embedding = (
-          await openai.embeddings.create({
-            model: "text-embedding-ada-002",
-            input: memory.content,
-          })
-        ).data[0]!.embedding;
+    const res = z
+      .object({ memory: memorySchema })
+      .safeParse(
+        JSON.parse(memoryCall.choices[0].message.function_call?.arguments ?? "")
+      );
 
-        if (
-          memory.memoryNumber &&
-          memory.memoryNumber > (memories?.length ?? 0)
-        )
-          memory.memoryNumber = undefined;
+    if (res.success) {
+      const updates = await Promise.all(
+        res.data.memory.map(async (memory) => {
+          const embedding = (
+            await openai.embeddings.create({
+              model: "text-embedding-ada-002",
+              input: memory.content,
+            })
+          ).data[0]!.embedding;
 
-        return {
-          content: memory.content,
-          id: memory.memoryNumber,
-          userId: user.data.id,
-          storeId: persist,
-          updatedAt: new Date(Date.now()),
-          embedding,
-        };
-      })
-    );
+          if (
+            memory.memoryNumber &&
+            memory.memoryNumber > (memories?.length ?? 0)
+          )
+            memory.memoryNumber = undefined;
 
-    // insert new memories (without memoryNumber) with supabase
-    const newMemories = updates.filter((memory) => !memory.id);
-    const insert = await supabaseClient.from("Memory").insert(
-      newMemories.map((m) => {
-        return { ...m, id: v4() };
-      })
-    );
-
-    console.log("insert", insert);
-
-    // update existing memories (with memoryNumber) with supabase
-    const existingMemories = updates.filter((memory) => memory.id);
-    await Promise.all(
-      existingMemories.map(async (memory) => {
-        await supabaseClient
-          .from("Memory")
-          .update({
+          return {
             content: memory.content,
-            embedding: memory.embedding,
-            updatedAt: memory.updatedAt,
-          })
-          .match({ id: memories![memory.id! - 1].id });
-      })
-    );
+            id: memory.memoryNumber,
+            userId: user.data.id,
+            storeId: persist,
+            updatedAt: new Date(Date.now()),
+            embedding,
+          };
+        })
+      );
+
+      // insert new memories (without memoryNumber) with supabase
+      const newMemories = updates.filter((memory) => !memory.id);
+      const insert = await supabaseClient.from("Memory").insert(
+        newMemories.map((m) => {
+          return { ...m, id: v4() };
+        })
+      );
+
+      console.log("insert", insert);
+
+      // update existing memories (with memoryNumber) with supabase
+      const existingMemories = updates.filter((memory) => memory.id);
+      await Promise.all(
+        existingMemories.map(async (memory) => {
+          await supabaseClient
+            .from("Memory")
+            .update({
+              content: memory.content,
+              embedding: memory.embedding,
+              updatedAt: memory.updatedAt,
+            })
+            .match({ id: memories![memory.id! - 1].id });
+        })
+      );
+    }
   }
 
   const res = await supabaseClient.from("Request").insert([
