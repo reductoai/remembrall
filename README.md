@@ -18,8 +18,8 @@ You should be able to clone the app and run it locally without issues if you wan
 
 ## Built With
 - Modal (PDF to Text conversion)
-- shadcn/ui (UI starter kit)
 - tinybird.co (real time analytics)
-- Next.js Edge Functions ()
-- Cohere Embeddings
-- OpenAI Function Calling
+- shadcn/ui (UI starter kit)
+- Next.js Edge Functions
+- Tailwind CSS
+- OpenAI Function Calling + Embeddings
