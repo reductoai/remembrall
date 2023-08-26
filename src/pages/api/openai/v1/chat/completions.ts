@@ -351,16 +351,14 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
           params as OpenAI.Chat.Completions.CompletionCreateParamsNonStreaming
         );
 
-        event.waitUntil(
-          logRequest(
-            openai,
-            apiKey,
-            params,
-            res,
-            +new Date() - start,
-            persist,
-            memories
-          )
+        await logRequest(
+          openai,
+          apiKey,
+          params,
+          res,
+          +new Date() - start,
+          persist,
+          memories
         );
       })()
     );
