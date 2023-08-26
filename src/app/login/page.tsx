@@ -16,7 +16,7 @@ export default function LoginPage() {
           alt="Platforms Starter Kit"
           width={200}
           height={200}
-          className="relative mx-auto h-28 w-auto dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
+          className="relative mx-auto h-28 w-auto dark:scale-110 dark:rounded-full"
           src="/logo.png"
         />
         <h1 className="font-cal mt-6 text-center text-2xl dark:text-white">
@@ -24,7 +24,7 @@ export default function LoginPage() {
         </h1>
       </CardHeader>
       <CardContent className="text-center">
-        A single pane of glass for LLM management.
+        Magical new abilities for your LLM with just one spell of code..
       </CardContent>
 
       <CardFooter>
