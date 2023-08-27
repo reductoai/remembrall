@@ -137,7 +137,7 @@ export const columns: ColumnDef<Rows>[] = [
           <SheetTrigger asChild>
             <Button variant="outline">Open</Button>
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent className="overflow-auto">
             <SheetHeader className="mb-4">
               <SheetTitle>Request</SheetTitle>
               {/* <SheetDescription>
