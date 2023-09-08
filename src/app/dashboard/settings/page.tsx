@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
 
-import { getLogsCode, getUsersCode } from "~/app/(dashboard)/settings/code";
-import Docs from "~/app/(dashboard)/settings/docs";
-import Options from "~/app/(dashboard)/settings/options";
+import { getLogsCode } from "~/app/dashboard/settings/code";
+import Docs from "~/app/dashboard/settings/docs";
+import Options from "~/app/dashboard/settings/options";
 
 export default async function Settings() {
   const code = await getLogsCode();

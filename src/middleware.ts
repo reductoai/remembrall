@@ -12,9 +12,11 @@ export default async function middleware(req: NextRequest) {
 
   const session = await getToken({ req });
   console.log("middleware intercepted: ", session, path);
-  if (!session && path !== "/login") {
-    return NextResponse.redirect(new URL("/login", req.url));
-  } else if (session && path == "/login") {
-    return NextResponse.redirect(new URL("/", req.url));
+  if (path !== "/") {
+    if (!session && path !== "/login") {
+      return NextResponse.redirect(new URL("/login", req.url));
+    } else if (session && path == "/login") {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
   }
 }

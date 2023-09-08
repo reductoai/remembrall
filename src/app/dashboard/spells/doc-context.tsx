@@ -150,7 +150,7 @@ export function CreateDocContextForm({ close }: { close: () => void }) {
 }
 
 import { useRouter } from "next/navigation";
-import { createDocContextSchema } from "~/app/(dashboard)/spells/types";
+import { createDocContextSchema } from "~/app/dashboard/spells/types";
 import {
   Table,
   TableBody,

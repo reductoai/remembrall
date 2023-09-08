@@ -4,7 +4,7 @@ import { AreaChart, BarChart, Metric, Text } from "@tremor/react";
 import { useMemo, useState } from "react";
 import { P, match } from "ts-pattern";
 import { columns, modelColors } from "./columns";
-import { DataTable } from "~/app/(dashboard)/(stats)/data-table";
+import { DataTable } from "~/app/dashboard/(stats)/data-table";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import {
   Select,

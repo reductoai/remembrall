@@ -12,6 +12,7 @@ ALTER TABLE "Snippet" ALTER COLUMN "id" SET DEFAULT (concat('snp-', gen_random_u
 ALTER TABLE "User" ALTER COLUMN "apiKey" SET DEFAULT (concat('gp-', gen_random_uuid()))::TEXT;
 
 
+-- public.match_memories(context_id, match_count, match_threshold, query_embedding)
 create or replace function match_memories (
   query_embedding vector(1536),
   match_threshold float,

@@ -1,7 +1,7 @@
 "use server";
 
-import { getUsersCode } from "~/app/(dashboard)/settings/code";
-import Docs from "~/app/(dashboard)/settings/docs";
+import { getUsersCode } from "~/app/dashboard/settings/code";
+import Docs from "~/app/dashboard/settings/docs";
 
 export default async function Remember() {
   const code = await getUsersCode();

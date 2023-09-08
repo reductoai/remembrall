@@ -5,8 +5,8 @@ import { FileStack, HistoryIcon } from "lucide-react";
 import {
   CreateDocContext,
   DisplayDocContexts,
-} from "~/app/(dashboard)/spells/doc-context";
-import Remember from "~/app/(dashboard)/spells/remember";
+} from "~/app/dashboard/spells/doc-context";
+import Remember from "~/app/dashboard/spells/remember";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 
 export default async function Spells() {

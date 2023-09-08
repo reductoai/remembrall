@@ -4,8 +4,8 @@ import { ChevronLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import AddTextDocument from "~/app/(dashboard)/spells/docs/[doc]/add-doc";
-import { DocChatPlayground } from "~/app/(dashboard)/spells/docs/[doc]/playground";
+import AddTextDocument from "~/app/dashboard/spells/docs/[doc]/add-doc";
+import { DocChatPlayground } from "~/app/dashboard/spells/docs/[doc]/playground";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
@@ -20,7 +20,7 @@ import { Separator } from "~/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { Textarea } from "~/components/ui/textarea";
 import { api } from "~/trpc/client";
-import { getUsersCode } from "~/app/(dashboard)/settings/code";
+import { getUsersCode } from "~/app/dashboard/settings/code";
 
 export default function Document({ params }: { params: { doc: string } }) {
   const router = useRouter();

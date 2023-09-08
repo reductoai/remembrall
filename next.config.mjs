@@ -4,7 +4,7 @@ import "./src/env.mjs";
 const config = {
   experimental: {
     serverActions: true,
-    serverComponentsExternalPackages: ["sharp", "onnxruntime-node"],
+    serverComponentsExternalPackages: ["shiki"],
   },
   compiler: {
     styledComponents: true,

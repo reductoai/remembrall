@@ -1,5 +1,3 @@
-import { preWrapperPlugin } from "~/lib/markdown/preWrapperPlugin";
-import * as sdf from "shiki";
 import MarkdownIt from "markdown-it";
 import {
   createDiffProcessor,
@@ -9,6 +7,7 @@ import {
   defineProcessor,
   getHighlighter,
 } from "shiki-processor";
+import { preWrapperPlugin } from "~/lib/markdown/preWrapperPlugin";
 
 const CurlLogs = `
 \`\`\`bash

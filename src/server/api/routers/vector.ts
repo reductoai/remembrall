@@ -4,7 +4,7 @@ import { env } from "~/env.mjs";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { createClient } from "@supabase/supabase-js";
 import { prisma } from "~/server/db";
-import { createDocContextSchema } from "~/app/(dashboard)/spells/types";
+import { createDocContextSchema } from "~/app/dashboard/spells/types";
 
 const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY,
