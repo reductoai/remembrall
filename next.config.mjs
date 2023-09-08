@@ -4,7 +4,7 @@ import "./src/env.mjs";
 const config = {
   experimental: {
     serverActions: true,
-    serverComponentsExternalPackages: ["shiki"],
+    serverComponentsExternalPackages: ["shiki", "vscode-oniguruma"],
   },
   compiler: {
     styledComponents: true,
