@@ -8,6 +8,20 @@ import {
   getHighlighter,
 } from "shiki-processor";
 import { preWrapperPlugin } from "~/lib/markdown/preWrapperPlugin";
+import { join as pathJoin } from "path";
+import * as fs from "fs/promises";
+
+const getShikiPath = (): string => {
+  return pathJoin(process.cwd(), "src/lib/shiki");
+};
+
+const touchShikiPath = (): void => {
+  if (touched.current) return; // only need to do once
+  fs.readdir(getShikiPath()); // fire and forget
+  touched.current = true;
+};
+
+const touched = { current: false };
 
 const CurlLogs = `
 \`\`\`bash
@@ -199,6 +213,10 @@ const highlighterConfig = {
       },
     }),
   ],
+  paths: {
+    languages: `${getShikiPath()}/languages/`,
+    themes: `${getShikiPath()}/themes/`,
+  },
 };
 
 const markdownConfig = {
@@ -225,6 +243,8 @@ let highlighterInstance: Highlighter | null = null;
 let markdownItInstance: MarkdownIt | null = null;
 
 async function getHighlighterInstance(): Promise<Highlighter> {
+  touchShikiPath();
+
   if (!highlighterInstance) {
     highlighterInstance = await getHighlighter(highlighterConfig);
   }
