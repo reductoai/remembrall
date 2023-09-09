@@ -124,7 +124,8 @@ export const columns: ColumnDef<Rows>[] = [
       ];
 
       const url =
-        "/playground/?messages=" + encodeURIComponent(JSON.stringify(messages));
+        "/dashboard/playground/?messages=" +
+        encodeURIComponent(JSON.stringify(messages));
 
       // return (
       //   <Link href={url} className={buttonVariants({ variant: "outline" })}>
@@ -191,15 +192,12 @@ export const columns: ColumnDef<Rows>[] = [
             {(row.original.memoryUpdate as MemoryDiff | null)?.map(
               (delta, idx) =>
                 delta.type === "insert" ? (
-                  <Alert
-                    key={idx}
-                    className="my-2 border-green-700 bg-green-50"
-                  >
+                  <Alert key={idx}>
                     <PlusIcon className="h-4 w-4" />
                     <AlertTitle>{delta.content}</AlertTitle>
                   </Alert>
                 ) : (
-                  <Alert key={idx} className="my-2 border-red-700 bg-red-50">
+                  <Alert key={idx} className="my-2">
                     <ArrowLeftRight className="h-4 w-4" />
                     <AlertTitle className="flex flex-row items-center">
                       {delta.replaced} <ArrowRight className="mx-2 h-4 w-4" />{" "}
