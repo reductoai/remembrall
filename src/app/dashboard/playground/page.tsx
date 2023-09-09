@@ -8,6 +8,7 @@ import { v4 } from "uuid";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+import { Switch } from "~/components/ui/switch";
 import { Textarea } from "~/components/ui/textarea";
 import { cn } from "~/lib/utils";
 import { api } from "~/trpc/client";
@@ -18,13 +19,15 @@ export default function Playground() {
 
   const user = api.settings.getUser.useQuery();
 
-  const [session, setSession] = useState("raunak");
+  const [session, setSession] = useState("");
+
+  const [history, setHistory] = useState(false);
 
   const { handleSubmit, messages, input, handleInputChange } = useChat({
     api: "/api/chat",
     body: {
       apiKey: user.data?.apiKey,
-      remember: session,
+      remember: history ? session : undefined,
     },
     initialMessages: loadedMessages
       ? JSON.parse(loadedMessages).map((m: any) => ({ ...m, id: v4() }))
@@ -48,12 +51,20 @@ export default function Playground() {
         <div className="w-full space-y-4">
           <div>
             <Label>History</Label>
-            <Input
-              value={session}
-              onChange={(e) => {
-                setSession(e.target.value);
-              }}
-            />
+            <div className="flex flex-row items-center space-x-2">
+              <Switch
+                checked={history}
+                onCheckedChange={(c) => setHistory(c)}
+              />
+              <Input
+                placeholder="Session ID"
+                disabled={history === false}
+                value={session}
+                onChange={(e) => {
+                  setSession(e.target.value);
+                }}
+              />
+            </div>
           </div>
           <div>
             <Label>System Message</Label>
