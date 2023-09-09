@@ -73,9 +73,11 @@ const ReviewCard = async ({ id }: { id: string }) => {
       <div className="mt-2 break-words text-left leading-normal tracking-tighter">
         <span className="overflow-ellipsis text-sm">
           {tweet.text
-            .split(" ")
-            .filter((word) => !word.startsWith("@"))
-            .join(" ")}
+            ? tweet.text
+                .split(" ")
+                .filter((word) => !word.startsWith("@"))
+                .join(" ")
+            : "Loading..."}
         </span>
       </div>
     </figure>
