@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
-import Providers from "~/app/providers";
+import { Suspense } from "react";
+import Providers, { PostHogPageview } from "~/app/providers";
 import { cn } from "~/lib/utils";
 import "~/styles/globals.css";
 import "~/styles/mdx.css";
@@ -22,6 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Suspense>
+        <PostHogPageview />
+      </Suspense>
       <body
         className={cn(
           "bg-background font-sans text-foreground",

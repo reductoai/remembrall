@@ -26,6 +26,8 @@ export const env = createEnv({
     TINYBIRD_API_KEY: z.string(),
     SUPABASE_URL: z.string().url(),
     SUPABASE_API_KEY: z.string(),
+    NEXT_PUBLIC_POSTHOG_HOST: z.string(),
+    NEXT_PUBLIC_POSTHOG_KEY: z.string(),
   },
 
   /**
@@ -53,6 +55,8 @@ export const env = createEnv({
     TINYBIRD_API_KEY: process.env.TINYBIRD_API_KEY,
     SUPABASE_URL: process.env.SUPABASE_URL,
     SUPABASE_API_KEY: process.env.SUPABASE_API_KEY,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
