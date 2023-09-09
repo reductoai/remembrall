@@ -67,8 +67,8 @@ async function logRequest(
         .toISOString()
         .replace("T", " ")
         .replace("Z", ""),
-      num_tokens: response.usage!.total_tokens,
-      price: response.usage!.total_tokens / 10000,
+      num_tokens: response.usage?.total_tokens ?? 100,
+      price: (response.usage?.total_tokens ?? 100) / 10000,
       user_id: user.data.id,
     }),
     headers: {
@@ -114,72 +114,76 @@ async function logRequest(
       ],
     });
 
-    const res = z
-      .object({ memory: memorySchema })
-      .safeParse(
-        JSON.parse(memoryCall.choices[0].message.function_call?.arguments ?? "")
-      );
+    if (memoryCall.choices[0].finish_reason === "function_call") {
+      const res = z
+        .object({ memory: memorySchema })
+        .safeParse(
+          JSON.parse(
+            memoryCall.choices[0].message.function_call?.arguments ?? ""
+          )
+        );
 
-    if (res.success) {
-      const updates = await Promise.all(
-        res.data.memory.map(async (memory) => {
-          const embedding = (
-            await openai.embeddings.create({
-              model: "text-embedding-ada-002",
-              input: memory.content,
-            })
-          ).data[0]!.embedding;
+      if (res.success) {
+        const updates = await Promise.all(
+          res.data.memory.map(async (memory) => {
+            const embedding = (
+              await openai.embeddings.create({
+                model: "text-embedding-ada-002",
+                input: memory.content,
+              })
+            ).data[0]!.embedding;
 
-          if (memory.id && memory.id > (memories?.length ?? 0))
-            memory.id = undefined;
+            if (memory.id && memory.id > (memories?.length ?? 0))
+              memory.id = undefined;
 
-          return {
-            content: memory.content,
-            id: memory.id,
-            userId: user.data.id,
-            storeId: persist,
-            updatedAt: new Date(Date.now()),
-            embedding,
-          };
-        })
-      );
-
-      // insert new memories (without id) with supabase
-      const newMemories = updates.filter((memory) => !memory.id);
-      const insert = await supabaseClient.from("Memory").insert(
-        newMemories.map((m) => {
-          return { ...m, id: v4() };
-        })
-      );
-
-      console.log("insert", insert);
-
-      // update existing memories (with id) with supabase
-      const existingMemories = updates.filter((memory) => memory.id);
-      await Promise.all(
-        existingMemories.map(async (memory) => {
-          await supabaseClient
-            .from("Memory")
-            .update({
+            return {
               content: memory.content,
-              embedding: memory.embedding,
-              updatedAt: memory.updatedAt,
-            })
-            .match({ id: memories![memory.id! - 1].id });
-        })
-      );
+              id: memory.id,
+              userId: user.data.id,
+              storeId: persist,
+              updatedAt: new Date(Date.now()),
+              embedding,
+            };
+          })
+        );
 
-      memoryUpdate = [
-        ...newMemories.map((m) => ({
-          type: "insert" as const,
-          content: m.content,
-        })),
-        ...existingMemories.map((m) => ({
-          type: "update" as const,
-          content: m.content,
-          replaced: memories![m.id! - 1].content,
-        })),
-      ];
+        // insert new memories (without id) with supabase
+        const newMemories = updates.filter((memory) => !memory.id);
+        const insert = await supabaseClient.from("Memory").insert(
+          newMemories.map((m) => {
+            return { ...m, id: v4() };
+          })
+        );
+
+        console.log("insert", insert);
+
+        // update existing memories (with id) with supabase
+        const existingMemories = updates.filter((memory) => memory.id);
+        await Promise.all(
+          existingMemories.map(async (memory) => {
+            await supabaseClient
+              .from("Memory")
+              .update({
+                content: memory.content,
+                embedding: memory.embedding,
+                updatedAt: memory.updatedAt,
+              })
+              .match({ id: memories![memory.id! - 1].id });
+          })
+        );
+
+        memoryUpdate = [
+          ...newMemories.map((m) => ({
+            type: "insert" as const,
+            content: m.content,
+          })),
+          ...existingMemories.map((m) => ({
+            type: "update" as const,
+            content: m.content,
+            replaced: memories![m.id! - 1].content,
+          })),
+        ];
+      }
     }
   }
 
@@ -189,11 +193,13 @@ async function logRequest(
       model: params.model,
       request: params as any,
       response: response as any,
-      numTokens: response.usage!.total_tokens,
+      numTokens: response.usage?.total_tokens ?? 100,
       duration,
       userId: user.data.id,
     },
   ]);
+
+  console.log("IMPORTANT: ", res);
 }
 
 type VectorResponse = {
