@@ -1,3 +1,5 @@
+"use server";
+
 import { cn } from "~/lib/utils";
 import Marquee from "~/components/magicui/marquee";
 import { getTweet, type Tweet } from "react-tweet/api";
