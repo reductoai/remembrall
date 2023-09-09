@@ -16,22 +16,22 @@ const navbar = [
   {
     logo: <LayoutDashboard className="mr-2 h-4 w-4" />,
     text: "Dashboard",
-    path: "/",
+    path: "/dashboard",
   },
   {
     logo: <MessagesSquare className="mr-2 h-4 w-4" />,
     text: "Playground",
-    path: "/playground",
+    path: "/dashboard/playground",
   },
   {
     logo: <Wand2 className="mr-2 h-4 w-4" />,
     text: "Spells",
-    path: "/spells",
+    path: "/dashboard/spells",
   },
   {
     logo: <Settings className="mr-2 h-4 w-4" />,
     text: "Settings",
-    path: "/settings",
+    path: "/dashboard/settings",
   },
 ];
 

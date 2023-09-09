@@ -1,25 +1,24 @@
 import { createClient } from "@supabase/supabase-js";
-import { createParser } from "eventsource-parser";
 import { NextFetchEvent, NextRequest } from "next/server";
 import OpenAI from "openai";
-import { ChatCompletion, ChatCompletionChunk } from "openai/resources/chat";
 import { v4 } from "uuid";
 import * as z from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import { env } from "~/env.mjs";
+import { splitOpenaiStream } from "~/lib/openai/streaming";
 
 const memorySchema = z.array(
   z.object({
-    memoryNumber: z
+    id: z
       .number()
       .describe(
-        "The number of of the existing memory to edit if you would like to edit an exisitng memory (starting from 1). Omit this field if you are creating a new memory."
+        "The id of the existing memory to edit if you would like to edit an exisitng memory (starting from 1). Omit this field if you are creating a new memory."
       )
       .optional(),
     content: z
       .string()
       .describe(
-        "The value of the memory (if memoryNumber specified this will replace the existing memory)."
+        "The value of the memory (if id specified this will replace the existing memory), otherwise new memory will be created."
       ),
   })
 );
@@ -101,7 +100,7 @@ async function logRequest(
       messages: [
         {
           role: "system",
-          content: `Given the messages from the user, update or create relevant memories below that could be useful in the future. Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places. Issues encountered, etc. They should be very short and brief, only encoding the relevant facts. If nothing is relevant as a fact (this may happen often) just provide an empty memory list. Only modify facts that are relevant to the conversation.`,
+          content: `Given the messages from the user, update or create relevant ~1 sentence memories below that could be useful in the future. Example memories: "User's name is Billy", "user likes chocolate", "user has a cofounder." Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places, etc. They should be very short and brief, only encoding the relevant facts. If nothing is relevant as a fact, just provide an empty memory list. Only modify facts that are relevant to the conversation.`,
         },
         { role: "user", content: "History to generate facts for: " + history },
       ],
@@ -130,15 +129,12 @@ async function logRequest(
             })
           ).data[0]!.embedding;
 
-          if (
-            memory.memoryNumber &&
-            memory.memoryNumber > (memories?.length ?? 0)
-          )
-            memory.memoryNumber = undefined;
+          if (memory.id && memory.id > (memories?.length ?? 0))
+            memory.id = undefined;
 
           return {
             content: memory.content,
-            id: memory.memoryNumber,
+            id: memory.id,
             userId: user.data.id,
             storeId: persist,
             updatedAt: new Date(Date.now()),
@@ -147,7 +143,7 @@ async function logRequest(
         })
       );
 
-      // insert new memories (without memoryNumber) with supabase
+      // insert new memories (without id) with supabase
       const newMemories = updates.filter((memory) => !memory.id);
       const insert = await supabaseClient.from("Memory").insert(
         newMemories.map((m) => {
@@ -157,7 +153,7 @@ async function logRequest(
 
       console.log("insert", insert);
 
-      // update existing memories (with memoryNumber) with supabase
+      // update existing memories (with id) with supabase
       const existingMemories = updates.filter((memory) => memory.id);
       await Promise.all(
         existingMemories.map(async (memory) => {
@@ -342,28 +338,36 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       throw new Error(err.error.message);
     }
 
-    // TODO: Don't duplicate this request
-    event.waitUntil(
-      (async () => {
-        const start = +new Date();
-        params.stream = false;
-        const res = await openai.chat.completions.create(
-          params as OpenAI.Chat.Completions.CompletionCreateParamsNonStreaming
-        );
+    // // TODO: Don't duplicate this request
+    // event.waitUntil(
+    //   (async () => {
+    //     const start = +new Date();
+    //     params.stream = false;
+    //     const res = await openai.chat.completions.create(
+    //       params as OpenAI.Chat.Completions.CompletionCreateParamsNonStreaming
+    //     );
 
-        await logRequest(
-          openai,
-          apiKey,
-          params,
-          res,
-          +new Date() - start,
-          persist,
-          memories
-        );
-      })()
-    );
+    //     await logRequest(
+    //       openai,
+    //       apiKey,
+    //       params,
+    //       res,
+    //       +new Date() - start,
+    //       persist,
+    //       memories
+    //     );
+    //   })()
+    // );
 
-    return new Response(response.body, {
+    async function logAndWait(x: Promise<string>) {
+      const result = await x;
+      console.log("After waiting: ", result);
+    }
+
+    const [body, ret] = splitOpenaiStream(response.body!);
+    event.waitUntil(logAndWait(body));
+
+    return new Response(ret, {
       headers: {
         "Content-Type": "text/event-stream",
       },

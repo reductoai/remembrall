@@ -12,23 +12,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 export default async function Spells() {
   return (
     <div className="w-full min-w-[600px]">
-      <Tabs defaultValue="account" className="h-fit w-full">
+      <Tabs defaultValue="history" className="h-fit w-full">
         <TabsList className="h-fit w-full">
-          <TabsTrigger value="account" className="w-1/2 text-lg">
-            <FileStack className="mr-2 h-4 w-4" />
-            Document Context
-          </TabsTrigger>
-          <TabsTrigger value="password" className="w-1/2 text-lg">
+          <TabsTrigger value="history" className="w-1/2 text-lg">
             <HistoryIcon className="mr-2 h-4 w-4" />
             Remember History
           </TabsTrigger>
+          <TabsTrigger value="doc" className="w-1/2 text-lg">
+            <FileStack className="mr-2 h-4 w-4" />
+            Document Context
+          </TabsTrigger>
         </TabsList>
-        <TabsContent value="account" className="flex flex-col space-y-2 p-2">
+        <TabsContent value="history">
+          <Remember />
+        </TabsContent>
+        <TabsContent value="doc" className="flex flex-col space-y-2 p-2">
           <CreateDocContext />
           <DisplayDocContexts />
-        </TabsContent>
-        <TabsContent value="password">
-          <Remember />
         </TabsContent>
       </Tabs>
     </div>
