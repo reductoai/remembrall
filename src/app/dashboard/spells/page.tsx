@@ -1,6 +1,6 @@
 "use server";
 
-import { FileStack, HistoryIcon } from "lucide-react";
+import { BrainIcon, FileStack, HistoryIcon } from "lucide-react";
 
 import {
   CreateDocContext,
@@ -15,8 +15,8 @@ export default async function Spells() {
       <Tabs defaultValue="history" className="h-fit w-full">
         <TabsList className="h-fit w-full">
           <TabsTrigger value="history" className="w-1/2 text-lg">
-            <HistoryIcon className="mr-2 h-4 w-4" />
-            Remember History
+            <BrainIcon className="mr-2 h-4 w-4" />
+            Long Term Memory
           </TabsTrigger>
           <TabsTrigger value="doc" className="w-1/2 text-lg">
             <FileStack className="mr-2 h-4 w-4" />
