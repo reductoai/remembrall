@@ -50,7 +50,7 @@ export default function Playground() {
       <div className="flex w-full grow flex-col space-y-4">
         <div className="w-full space-y-4">
           <div>
-            <Label>History</Label>
+            <Label>Long Term Memory</Label>
             <div className="flex flex-row items-center space-x-2">
               <Switch
                 checked={history}
