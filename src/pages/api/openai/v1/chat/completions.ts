@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextFetchEvent, NextRequest } from "next/server";
 import OpenAI from "openai";
+import { ChatCompletion } from "openai/resources/chat";
 import { v4 } from "uuid";
 import * as z from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
@@ -324,6 +325,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
   if (params.stream) {
     params.temperature = 0; // enforce consistency
 
+    const start = +new Date();
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       headers: {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
@@ -338,30 +340,18 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       throw new Error(err.error.message);
     }
 
-    // // TODO: Don't duplicate this request
-    // event.waitUntil(
-    //   (async () => {
-    //     const start = +new Date();
-    //     params.stream = false;
-    //     const res = await openai.chat.completions.create(
-    //       params as OpenAI.Chat.Completions.CompletionCreateParamsNonStreaming
-    //     );
-
-    //     await logRequest(
-    //       openai,
-    //       apiKey,
-    //       params,
-    //       res,
-    //       +new Date() - start,
-    //       persist,
-    //       memories
-    //     );
-    //   })()
-    // );
-
-    async function logAndWait(x: Promise<string>) {
+    async function logAndWait(x: Promise<ChatCompletion>) {
       const result = await x;
       console.log("After waiting: ", result);
+      logRequest(
+        openai,
+        apiKey,
+        params,
+        result,
+        +new Date() - start,
+        persist,
+        memories
+      );
     }
 
     const [body, ret] = splitOpenaiStream(response.body!);

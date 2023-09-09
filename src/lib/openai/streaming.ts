@@ -39,8 +39,8 @@ export function splitOpenaiStream(
               message: {
                 content: null,
                 role: "assistant",
+                function_call: undefined,
               },
-              // content: undefined,
             };
 
             chunks.forEach((chunk) => {
@@ -52,9 +52,27 @@ export function splitOpenaiStream(
               }
               if (chunk.choices[0].delta.role)
                 choice.message.role = chunk.choices[0].delta.role;
+              if (chunk.choices[0].delta.function_call) {
+                if (choice.message.function_call === undefined)
+                  choice.message.function_call = chunk.choices[0].delta
+                    .function_call as any;
+                else {
+                  choice.message.function_call = {
+                    name: chunk.choices[0].delta.function_call.name!,
+                    arguments:
+                      choice.message.function_call.arguments +
+                      chunk.choices[0].delta.function_call.arguments!,
+                  };
+                }
+              }
+            });
 
-              chunk.choices[0].delta.function_call?.arguments;
-              chunk.choices[0].delta.function_call?.name;
+            resolveCompletion({
+              choices: [choice],
+              id: chunks[0].id,
+              created: chunks[0].created,
+              model: chunks[0].model,
+              object: chunks[0].object,
             });
           } else {
             const data = JSON.parse(
