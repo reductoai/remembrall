@@ -11,6 +11,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import LogoutButton from "~/app/login/logout-button";
 import SidebarItems from "~/components/sidebar-items";
+import { Badge } from "~/components/ui/badge";
 import { buttonVariants } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 import { getServerAuthSession } from "~/server/auth";
@@ -37,11 +38,15 @@ export async function Sidebar({
           >
             <Image
               src="/logo.png"
-              width={30}
-              height={30}
-              alt="Remembrall logo"
+              alt="remembrall logo"
+              width={36}
+              height={36}
+              className="h-6 w-6"
             />
-            <h1 className="text-xl font-semibold">Remembrall</h1>
+            <span className="hidden text-2xl font-semibold sm:inline-block">
+              Remembrall
+            </span>
+            <Badge>Beta</Badge>
           </Link>
 
           <SidebarItems />
