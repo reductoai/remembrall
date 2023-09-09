@@ -26,7 +26,7 @@ const touched = { current: false };
 const CurlLogs = `
 \`\`\`bash
 curl https://api.openai.com/v1/chat/completions // [!code --] \\
-curl https://remembrall.dev/api/v1/chat/completions // [!code ++] \\
+curl https://remembrall.dev/api/openai/v1/chat/completions // [!code ++] \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer $OPENAI_API_KEY" \\
   -H "x-gp-api-key: $RMBR_API_KEY" // [!code ++] \\
@@ -39,7 +39,7 @@ curl https://remembrall.dev/api/v1/chat/completions // [!code ++] \\
 const JSLogs = `
 \`\`\`js
 fetch("https://api.openai.com/v1/chat/completions", { // [!code --]
-fetch("https://remembrall.dev/api/v1/chat/completions", { // [!code ++]
+fetch("https://remembrall.dev/api/openai/v1/chat/completions", { // [!code ++]
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -62,7 +62,7 @@ import { Configuration, OpenAIApi } from "openai";
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
   basePath: "https://api.openai.com/v1",  // [!code --]
-  basePath: "https://remembrall.dev/api/v1",  // [!code ++]
+  basePath: "https://remembrall.dev/api/openai/v1",  // [!code ++]
   baseOptions: { // [!code ++:5]
     headers: {
       "x-gp-api-key": \`\${process.env.RMBR_API_KEY}\`,
@@ -89,7 +89,7 @@ import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base = "https://api.openai.com/v1"  // [!code --]
-openai.api_base = "https://remembrall.dev/api/v1"  // [!code ++]
+openai.api_base = "https://remembrall.dev/api/openai/v1"  // [!code ++]
 
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
@@ -108,7 +108,7 @@ print(completion.choices[0].message)
 const CurlUser = `
 \`\`\`bash
 curl https://api.openai.com/v1/chat/completions // [!code --] \\
-curl https://remembrall.dev/api/v1/chat/completions // [!code ++] \\
+curl https://remembrall.dev/api/openai/v1/chat/completions // [!code ++] \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer $OPENAI_API_KEY" \\
   -H "x-gp-api-key: $RMBR_API_KEY" // [!code ++] \\
@@ -122,7 +122,7 @@ curl https://remembrall.dev/api/v1/chat/completions // [!code ++] \\
 const JSUser = `
 \`\`\`js
 fetch("https://api.openai.com/v1/chat/completions", { // [!code --]
-fetch("https://remembrall.dev/api/v1/chat/completions", { // [!code ++]
+fetch("https://remembrall.dev/api/openai/v1/chat/completions", { // [!code ++]
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -146,7 +146,7 @@ import { Configuration, OpenAIApi } from "openai";
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
   basePath: "https://api.openai.com/v1",  // [!code --]
-  basePath: "https://remembrall.dev/api/v1",  // [!code ++]
+  basePath: "https://remembrall.dev/api/openai/v1",  // [!code ++]
   baseOptions: { // [!code ++:5]
     headers: {
       "x-gp-api-key": \`Bearer \${process.env.RMBR_API_KEY}\`,
@@ -174,7 +174,7 @@ import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base = "https://api.openai.com/v1"  // [!code --]
-openai.api_base = "https://remembrall.dev/api/v1"  // [!code ++]
+openai.api_base = "https://remembrall.dev/api/openai/v1"  // [!code ++]
 
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",

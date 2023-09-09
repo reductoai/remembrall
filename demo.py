@@ -5,7 +5,7 @@ import os
 dotenv.load_dotenv()
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
-openai.api_base = "http://localhost:3000/api/openai/v1"
+openai.api_base = "https://remembrall.dev/api/openai/v1"
 
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
