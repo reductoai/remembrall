@@ -54,6 +54,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply h-screen w-screen overflow-clip bg-background text-foreground;
   }
 }

@@ -10,7 +10,7 @@ const config = {
     styledComponents: true,
   },
   images: {
-    domains: ["avatars.githubusercontent.com"],
+    domains: ["avatars.githubusercontent.com", "pbs.twimg.com"],
   },
 
   async headers() {
