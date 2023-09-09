@@ -22,10 +22,6 @@ const reviews = [
 ];
 const ReviewCard = async ({ id }: { id: string }) => {
   const tweet = (await getTweet(id)) as Tweet;
-  const text = tweet.text
-    .split(" ")
-    .filter((word) => !word.startsWith("@"))
-    .join(" ");
   return (
     <figure
       className={cn(
@@ -75,7 +71,12 @@ const ReviewCard = async ({ id }: { id: string }) => {
         </Link>
       </div>
       <div className="mt-2 break-words text-left leading-normal tracking-tighter">
-        <span className="overflow-ellipsis text-sm">{text}</span>
+        <span className="overflow-ellipsis text-sm">
+          {tweet.text
+            .split(" ")
+            .filter((word) => !word.startsWith("@"))
+            .join(" ")}
+        </span>
       </div>
     </figure>
   );
