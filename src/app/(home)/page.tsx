@@ -27,7 +27,7 @@ export default function Hello() {
               <span className="hidden text-2xl font-semibold sm:inline-block">
                 Remembrall
               </span>
-              <Badge>Beta</Badge>
+              <Badge className="hidden sm:inline-block">Beta</Badge>
             </Link>
             <Dark />
           </div>

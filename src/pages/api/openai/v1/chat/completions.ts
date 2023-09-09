@@ -348,8 +348,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
 
     async function logAndWait(x: Promise<ChatCompletion>) {
       const result = await x;
-      console.log("After waiting: ", result);
-      logRequest(
+      await logRequest(
         openai,
         apiKey,
         params,
