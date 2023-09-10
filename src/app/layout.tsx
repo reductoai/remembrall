@@ -26,14 +26,16 @@ export default function RootLayout({
       <Suspense>
         <PostHogPageview />
       </Suspense>
-      <body
-        className={cn(
-          "bg-background font-sans text-foreground",
-          inter.variable
-        )}
-      >
-        <Providers>{children}</Providers>
-      </body>
+      <Providers>
+        <body
+          className={cn(
+            "bg-background font-sans text-foreground",
+            inter.variable
+          )}
+        >
+          {children}
+        </body>
+      </Providers>
     </html>
   );
 }
