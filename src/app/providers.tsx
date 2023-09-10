@@ -39,14 +39,20 @@ export function PostHogPageview(): JSX.Element {
 function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
-      <PostHogProvider client={posthog}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-          <Toaster />
-        </ThemeProvider>
-      </PostHogProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem={true}
+      >
+        {children}
+        <Toaster />
+      </ThemeProvider>
     </SessionProvider>
   );
+}
+
+export function PHProvider({ children }: { children: React.ReactNode }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
 }
 
 export default api.withTRPC(Providers) as any;

@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import { Suspense } from "react";
-import Providers, { PostHogPageview } from "~/app/providers";
+import Providers, { PHProvider, PostHogPageview } from "~/app/providers";
 import { cn } from "~/lib/utils";
 import "~/styles/globals.css";
 import "~/styles/mdx.css";
@@ -26,16 +26,16 @@ export default function RootLayout({
       <Suspense>
         <PostHogPageview />
       </Suspense>
-      <Providers>
+      <PHProvider>
         <body
           className={cn(
-            "bg-background font-sans text-foreground",
+            "h-screen w-screen overflow-clip bg-background font-sans text-foreground",
             inter.variable
           )}
         >
-          {children}
+          <Providers>{children}</Providers>
         </body>
-      </Providers>
+      </PHProvider>
     </html>
   );
 }
