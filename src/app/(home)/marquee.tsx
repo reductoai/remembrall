@@ -6,7 +6,7 @@ import { getTweet, type Tweet } from "react-tweet/api";
 import Image from "next/image";
 import Link from "next/link";
 
-const reviews = [
+const reviews1 = [
   "1700442300747264331",
   "1700528249342705694",
   "1700518619568808169",
@@ -14,6 +14,8 @@ const reviews = [
   "1700455160479109247",
   "1700438323909595207",
   "1700344834081395026",
+];
+const reviews2 = [
   "1700294427334385799",
   "1700357676788539760",
   "1700323722220167202",
@@ -90,12 +92,12 @@ export const MarqueeDemo = () => {
   return (
     <div className="relative flex h-fit w-screen flex-col items-center justify-center gap-4 overflow-hidden rounded-lg  border py-8">
       <Marquee pauseOnHover className="[--duration:90s]">
-        {reviews.map((review) => (
+        {reviews1.map((review) => (
           <ReviewCard key={review} id={review} />
         ))}
       </Marquee>
       <Marquee reverse pauseOnHover className="[--duration:90s]">
-        {reviews.map((review) => (
+        {reviews2.map((review) => (
           <ReviewCard key={review} id={review} />
         ))}
       </Marquee>
