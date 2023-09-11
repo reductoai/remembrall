@@ -23,9 +23,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Suspense>
-        <PostHogPageview />
-      </Suspense>
       <PHProvider>
         <body
           className={cn(
@@ -33,7 +30,12 @@ export default function RootLayout({
             inter.variable
           )}
         >
-          <Providers>{children}</Providers>
+          <Providers>
+            <Suspense>
+              <PostHogPageview />
+            </Suspense>
+            {children}
+          </Providers>
         </body>
       </PHProvider>
     </html>
