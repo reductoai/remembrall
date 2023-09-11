@@ -1,6 +1,7 @@
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import Dark from "~/app/(home)/dark";
 import { MarqueeDemo } from "~/app/(home)/marquee";
 import GridPattern from "~/components/magicui/grid-pattern";
@@ -12,7 +13,7 @@ import { cn } from "~/lib/utils";
 
 export default function Hello() {
   return (
-    <main className="h-screen w-screen">
+    <main className="h-screen w-screen overflow-y-auto">
       <div className="div h-screen w-screen place-items-center space-y-2 overflow-x-clip bg-white dark:bg-black">
         <header className="supports-backdrop-blur:bg-background/80 sticky top-0 z-40 h-16 w-screen overflow-clip backdrop-blur">
           <div className="container flex h-16 items-center justify-between">
@@ -69,7 +70,9 @@ export default function Hello() {
             </Link>
           </section>
 
-          <MarqueeDemo />
+          <Suspense>
+            <MarqueeDemo />
+          </Suspense>
         </div>
       </div>
 
