@@ -1,19 +1,17 @@
 "use client";
 
-import { SessionProvider, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { useEffect } from "react";
 import { ThemeProvider } from "~/components/theme-provider";
 import { Toaster } from "~/components/ui/toaster";
-import { env } from "~/env.mjs";
 import { api } from "~/trpc/client";
 
 if (typeof window !== "undefined") {
-  console.log("hello");
-  posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: env.NEXT_PUBLIC_POSTHOG_HOST,
+  posthog.init("phc_9t1I6AyIj3uSkw7sYL5xqBvCveTuY39Fz9i25bOhqBn", {
+    api_host: "https://app.posthog.com",
     capture_pageview: false, // Disable automatic pageview capture, as we capture manually
   });
 }
@@ -28,7 +26,6 @@ export function PostHogPageview(): JSX.Element {
       if (searchParams && searchParams.toString()) {
         url = url + `?${searchParams.toString()}`;
       }
-      console.log("am capturing stuff");
       posthog.capture("$pageview", {
         $current_url: url,
       });
