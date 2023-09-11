@@ -20,17 +20,14 @@ if (typeof window !== "undefined") {
 export function PostHogPageview(): JSX.Element {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { data: session } = useSession();
 
   useEffect(() => {
-    if (session?.user?.email) {
-      posthog.identify(session.user.email);
-    }
     if (pathname) {
       let url = window.origin + pathname;
       if (searchParams && searchParams.toString()) {
         url = url + `?${searchParams.toString()}`;
       }
+      console.log("am capturing stuff");
       posthog.capture("$pageview", {
         $current_url: url,
       });
