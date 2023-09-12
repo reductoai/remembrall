@@ -86,9 +86,9 @@ export default function Hello() {
             </Link>
           </section>
 
-          <Suspense>
+          {/* <Suspense>
             <MarqueeDemo />
-          </Suspense>
+          </Suspense> */}
         </div>
 
         <div className="relative -mt-8 h-fit w-screen pt-8">
