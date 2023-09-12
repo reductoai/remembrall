@@ -90,7 +90,7 @@ const ReviewCard = async ({ id }: { id: string }) => {
 
 export const MarqueeDemo = () => {
   return (
-    <div className="relative flex h-fit w-screen flex-col items-center justify-center gap-4 overflow-hidden rounded-lg  border py-8">
+    <div className="relative flex h-fit w-screen flex-col items-center justify-center gap-4 overflow-hidden rounded-lg  border bg-background py-8">
       <Marquee pauseOnHover className="[--duration:90s]">
         {reviews1.map((review) => (
           <ReviewCard key={review} id={review} />
