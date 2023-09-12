@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import Dark from "~/app/(home)/dark";
 import { MarqueeDemo } from "~/app/(home)/marquee";
+import Globe from "~/components/magicui/globe";
 import GridPattern from "~/components/magicui/grid-pattern";
 import LinearGradient from "~/components/magicui/linear-gradient";
 import ShimmerButton from "~/components/magicui/shimmer-button";
@@ -13,8 +14,8 @@ import { cn } from "~/lib/utils";
 
 export default function Hello() {
   return (
-    <main className="h-screen w-screen overflow-y-auto">
-      <div className="div h-screen w-screen place-items-center space-y-2 overflow-x-clip bg-white dark:bg-black">
+    <main className="h-screen w-screen overflow-clip">
+      <div className="div h-screen w-screen place-items-center space-y-2 overflow-y-auto overflow-x-clip bg-white dark:bg-black">
         <header className="supports-backdrop-blur:bg-background/80 sticky top-0 z-40 h-16 w-screen overflow-clip backdrop-blur">
           <div className="container flex h-16 items-center justify-between">
             <Link href="/" className="flex flex-row items-center space-x-2">
@@ -51,6 +52,19 @@ export default function Hello() {
           </div>
           <div className="absolute bottom-0 h-px w-full bg-[radial-gradient(50%_100%_at_50%_100%,rgba(0,0,0,.12)_0%,rgba(255,255,255,0)_100%)] dark:bg-[radial-gradient(50%_100%_at_50%_100%,rgba(255,255,255,.32)_0%,rgba(255,255,255,0)_100%)]"></div>
         </header>
+        <div className="absolute -top-10 h-[80%] w-full">
+          <div className="relative h-full w-full">
+            <GridPattern
+              width={80}
+              height={80}
+              className={cn(
+                "inset-x-0 inset-y-[-30%] -top-[1rem] h-full skew-y-12",
+                "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
+              )}
+            />
+            <LinearGradient to="rgb(120,119,198,0.2)" direction="top left" />
+          </div>
+        </div>
         <div className="mx-auto flex max-w-[48rem] flex-col items-center gap-4 space-y-4 p-8 text-center md:p-8">
           <section className="flex flex-col items-center space-y-8 pb-12 pt-20">
             <h1 className="whitespace-pre-wrap bg-gradient-to-b from-black to-gray-800/90 bg-clip-text text-center text-4xl font-semibold leading-none tracking-tight text-transparent dark:from-white dark:to-slate-300/90 sm:text-5xl md:text-6xl lg:text-8xl">
@@ -74,17 +88,15 @@ export default function Hello() {
             <MarqueeDemo />
           </Suspense>
         </div>
-      </div>
 
-      <GridPattern
-        width={80}
-        height={80}
-        className={cn(
-          "inset-x-0 inset-y-[-30%] -top-[1rem] h-[80%] skew-y-12",
-          "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
-        )}
-      />
-      <LinearGradient to="rgb(120,119,198,0.2)" direction="top left" />
+        <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-background px-40 pb-40 pt-8 md:pb-60">
+          <Globe className="top-28" />
+          <span className="pointer-events-none whitespace-nowrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+            Edge First
+          </span>
+          <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
+        </div>
+      </div>
     </main>
   );
 }
