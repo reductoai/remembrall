@@ -14,6 +14,15 @@ export const metadata = {
   title: "Remembrall",
   description: "LLM observability platform",
   icons: [{ rel: "icon", url: "/logo.png" }],
+  openGraph: {
+    images: [
+      {
+        url: "/og.png",
+        width: 2400,
+        height: 1350,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
