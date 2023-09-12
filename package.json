@@ -38,6 +38,7 @@
     "@trpc/next": "^10.27.1",
     "@trpc/react-query": "^10.27.1",
     "@trpc/server": "^10.27.1",
+    "@vercel/og": "^0.5.13",
     "ai": "^2.2.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
