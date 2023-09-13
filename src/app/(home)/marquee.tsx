@@ -24,6 +24,7 @@ const reviews2 = [
   "1700264313750245624",
   "1700259749709971678",
 ];
+
 const ReviewCard = async ({ id }: { id: string }) => {
   const tweet = (await getTweet(id)) as Tweet;
   return (
