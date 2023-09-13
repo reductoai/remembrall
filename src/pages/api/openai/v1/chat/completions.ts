@@ -215,7 +215,6 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
   //
   const apiKey = req.headers.get("x-gp-api-key") as string;
 
-  console.log(req.headers);
   const OPENAI_API_KEY = req.headers
     .get("authorization")!
     .replace("Bearer ", "");
@@ -274,11 +273,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       user_id: user.data.id,
     });
 
-    console.log(memReq);
-
     memories = memReq.data;
-
-    console.log("Retrieved memories: ", memories);
 
     if (memories?.length ?? 0 > 0) {
       prependSystemMessage(
@@ -292,6 +287,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
   }
 
   if (context) {
+    console.log("Retrieving context from ", context);
     const contextData = await supabaseClient
       .from("DocumentContext")
       .select("*")

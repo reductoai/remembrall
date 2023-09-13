@@ -15,7 +15,7 @@ completion = openai.ChatCompletion.create(
   ],
   headers={
     "x-gp-api-key": os.environ["GP_API_KEY"],
-    "x-gp-remember": "sep10",
+    # "x-gp-remember": "sep10",
     # "x-gp-context": "dc-9c83c217-b5c6-4f94-b42f-7dd181c011e3",
   },
 )

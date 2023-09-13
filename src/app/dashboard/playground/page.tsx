@@ -12,22 +12,34 @@ import { Switch } from "~/components/ui/switch";
 import { Textarea } from "~/components/ui/textarea";
 import { cn } from "~/lib/utils";
 import { api } from "~/trpc/client";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 
 export default function Playground() {
   const searchParams = useSearchParams();
   const loadedMessages = searchParams?.get("messages");
 
   const user = api.settings.getUser.useQuery();
+  const contexts = api.vector.docContexts.useQuery();
 
   const [session, setSession] = useState("");
-
   const [history, setHistory] = useState(false);
+  const [context, setContext] = useState(false);
+  const [contextId, setContextId] = useState("");
 
   const { handleSubmit, messages, input, handleInputChange } = useChat({
     api: "/api/chat",
     body: {
       apiKey: user.data?.apiKey,
       remember: history ? session : undefined,
+      context: context ? contextId : undefined,
     },
     initialMessages: loadedMessages
       ? JSON.parse(loadedMessages).map((m: any) => ({ ...m, id: v4() }))
@@ -64,6 +76,36 @@ export default function Playground() {
                   setSession(e.target.value);
                 }}
               />
+            </div>
+          </div>
+
+          <div>
+            <Label>Document Contexts</Label>
+            <div className="flex flex-row items-center space-x-2">
+              <Switch
+                checked={context}
+                onCheckedChange={(c) => setContext(c)}
+              />
+              <Select
+                disabled={!context}
+                onValueChange={(e) => {
+                  setContextId(e);
+                }}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a document context" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Document Contexts</SelectLabel>
+                    {contexts.data?.map((context) => (
+                      <SelectItem key={context.id} value={context.id}>
+                        {context.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </div>
           <div>
