@@ -1,0 +1,2878 @@
+[
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700215444542750923",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 0,
+    "created_at": "2023-09-09T09:33:31.000Z",
+    "display_text_range": [
+      28,
+      204
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            15,
+            27
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700442300747264331",
+    "text": "@raunakdoesdev @helicone_ai This is like an LLM learning to sleep when it gets tired. 😴 if it learns to compare new experiences to pretrained experiences and store them with references, it would be huge.",
+    "user": {
+      "id_str": "196315074",
+      "name": "Bager Akbay",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1185002351897260034/O_fwLOv__normal.jpg",
+      "screen_name": "bagerakbay",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700442300747264331"
+      ],
+      "editable_until_msecs": "1694255611000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "lang": "en",
+    "favorite_count": 2,
+    "created_at": "2023-09-09T15:15:03.000Z",
+    "display_text_range": [
+      0,
+      82
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [],
+      "symbols": []
+    },
+    "id_str": "1700528249342705694",
+    "text": "Very interesting would be fun to tinker with and implement in the right use cases.",
+    "user": {
+      "id_str": "1053005994",
+      "name": "Samin | Ai Specialist 🤖",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1683235076438388743/c_iJZ6LE_normal.jpg",
+      "screen_name": "SaminXD",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700528249342705694"
+      ],
+      "editable_until_msecs": "1694276103000",
+      "is_edit_eligible": true,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "quoted_tweet": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700215444542750923",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 1,
+    "created_at": "2023-09-09T14:36:47.000Z",
+    "display_text_range": [
+      28,
+      56
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            15,
+            27
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700518619568808169",
+    "text": "@raunakdoesdev @helicone_ai Such an interesting project.",
+    "user": {
+      "id_str": "1637814865443127298",
+      "name": "MasteringMachines",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1684605614553432084/MHE_yRu9_normal.jpg",
+      "screen_name": "MstrMachines",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700518619568808169"
+      ],
+      "editable_until_msecs": "1694273807000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700215444542750923",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "lt",
+    "favorite_count": 0,
+    "created_at": "2023-09-09T14:11:31.000Z",
+    "display_text_range": [
+      28,
+      36
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            15,
+            27
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700512261066850775",
+    "text": "@raunakdoesdev @helicone_ai Genius!!",
+    "user": {
+      "id_str": "1075902604817981440",
+      "name": "CryptoHAL",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1699422034541903872/8jw_EpR7_normal.jpg",
+      "screen_name": "hal_crypto",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700512261066850775"
+      ],
+      "editable_until_msecs": "1694272291000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700215444542750923",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 0,
+    "created_at": "2023-09-09T10:24:37.000Z",
+    "display_text_range": [
+      28,
+      36
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            15,
+            27
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700455160479109247",
+    "text": "@raunakdoesdev @helicone_ai Awesome!",
+    "user": {
+      "id_str": "3317425726",
+      "name": "Jerry Lusato",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1674681392033062912/7Ybkhjcq_normal.jpg",
+      "screen_name": "jerrylusato",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700455160479109247"
+      ],
+      "editable_until_msecs": "1694258677000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "TweetTombstone",
+    "tombstone": {
+      "text": {
+        "text": "This Post was deleted by the Post author. Learn more",
+        "entities": [
+          {
+            "from_index": 42,
+            "to_index": 52,
+            "ref": {
+              "__typename": "TimelineUrl",
+              "url": "https://help.twitter.com/rules-and-policies/notices-on-twitter",
+              "url_type": "ExternalUrl"
+            }
+          }
+        ],
+        "rtl": false
+      }
+    }
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700295076033786316",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 1,
+    "created_at": "2023-09-09T03:06:13.000Z",
+    "display_text_range": [
+      42,
+      71
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "17103367",
+          "indices": [
+            15,
+            28
+          ],
+          "name": "Paul Rowan 𓅃",
+          "screen_name": "jockeyclarke"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            29,
+            41
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700344834081395026",
+    "text": "@raunakdoesdev @jockeyclarke @helicone_ai man, this is clever. Nice job",
+    "user": {
+      "id_str": "1171349340",
+      "name": "Nelson Carrillo",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1602263072533520386/78DE3E7n_normal.jpg",
+      "screen_name": "nelsonc___",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700344834081395026"
+      ],
+      "editable_until_msecs": "1694232373000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "in_reply_to_screen_name": "jockeyclarke",
+      "in_reply_to_status_id_str": "1700294427334385799",
+      "in_reply_to_user_id_str": "17103367",
+      "lang": "en",
+      "reply_count": 5,
+      "retweet_count": 0,
+      "favorite_count": 19,
+      "created_at": "2023-09-08T23:48:30.000Z",
+      "display_text_range": [
+        27,
+        174
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "17103367",
+            "indices": [
+              0,
+              13
+            ],
+            "name": "Paul Rowan 𓅃",
+            "screen_name": "jockeyclarke"
+          },
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              14,
+              26
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": []
+      },
+      "id_str": "1700295076033786316",
+      "text": "@jockeyclarke @helicone_ai yep that's right, but doing an intermediate llm call to handle that compression and using vector db for retrieval of only relevant info at run time",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700295076033786316"
+        ],
+        "editable_until_msecs": "1694220510000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700215444542750923",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 8,
+    "created_at": "2023-09-08T23:45:56.000Z",
+    "display_text_range": [
+      28,
+      307
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            15,
+            27
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700294427334385799",
+    "text": "@raunakdoesdev @helicone_ai I don’t care what the nitpickers say. This looks really slick and right along the lines of some experiments I wanted to try out. This is effectively compressing the chat history so it fits into the context window, yes?\nAnd you re-compress the history as it becomes less relevant?",
+    "user": {
+      "id_str": "17103367",
+      "name": "Paul Rowan 𓅃",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1327440550975447041/7sEdy5Ky_normal.jpg",
+      "screen_name": "jockeyclarke",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700294427334385799"
+      ],
+      "editable_until_msecs": "1694220356000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 3,
+    "news_action_type": "conversation",
+    "parent": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700215444542750923",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 0,
+    "created_at": "2023-09-09T03:57:15.000Z",
+    "display_text_range": [
+      28,
+      53
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            15,
+            27
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700357676788539760",
+    "text": "@raunakdoesdev @helicone_ai This is very interesting!",
+    "user": {
+      "id_str": "1465001722204540929",
+      "name": "BadTech Bandit ∞ #AI, #drones, web3 & beyond",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1465002389761675274/pfOaNgu2_normal.jpg",
+      "screen_name": "BadTechBandit",
+      "verified": false,
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700357676788539760"
+      ],
+      "editable_until_msecs": "1694235435000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700215444542750923",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 0,
+    "created_at": "2023-09-09T01:42:20.000Z",
+    "display_text_range": [
+      28,
+      59
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            15,
+            27
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700323722220167202",
+    "text": "@raunakdoesdev @helicone_ai Would love access to this beta.",
+    "user": {
+      "id_str": "1261436425",
+      "name": "Sam Gabell",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1639148821510000641/JyCk7cty_normal.jpg",
+      "screen_name": "samgabell",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700323722220167202"
+      ],
+      "editable_until_msecs": "1694227340000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700276621024825752",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 2,
+    "created_at": "2023-09-08T23:24:20.000Z",
+    "display_text_range": [
+      45,
+      186
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "3021859711",
+          "indices": [
+            15,
+            31
+          ],
+          "name": "AI Biz Guy",
+          "screen_name": "SamuelsonTweets"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            32,
+            44
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700288991218565387",
+    "text": "@raunakdoesdev @SamuelsonTweets @helicone_ai With an LLM constantly performing CRUD operations on the vector database, the database can become an infinite cache for conversation history.",
+    "user": {
+      "id_str": "387481022",
+      "name": "G.I Joe",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1602732562836848641/s5L_P-FB_normal.jpg",
+      "screen_name": "Joedefendre",
+      "verified": false,
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700288991218565387"
+      ],
+      "editable_until_msecs": "1694219060000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "in_reply_to_screen_name": "SamuelsonTweets",
+      "in_reply_to_status_id_str": "1700270619244499044",
+      "in_reply_to_user_id_str": "3021859711",
+      "lang": "en",
+      "reply_count": 3,
+      "retweet_count": 0,
+      "favorite_count": 3,
+      "created_at": "2023-09-08T22:35:10.000Z",
+      "display_text_range": [
+        30,
+        177
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "3021859711",
+            "indices": [
+              0,
+              16
+            ],
+            "name": "AI Biz Guy",
+            "screen_name": "SamuelsonTweets"
+          },
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              17,
+              29
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": []
+      },
+      "id_str": "1700276621024825752",
+      "text": "@SamuelsonTweets @helicone_ai not quite - there's an intermediate processing step that goes from conversation history -&gt; relevant context before storing the vector embeddings",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700276621024825752"
+        ],
+        "editable_until_msecs": "1694216110000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700215444542750923",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 1,
+    "created_at": "2023-09-08T22:07:57.000Z",
+    "display_text_range": [
+      28,
+      72
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            15,
+            27
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700269768954269847",
+    "text": "@raunakdoesdev @helicone_ai This is very impressive and yet very simple.",
+    "user": {
+      "id_str": "19388010",
+      "name": "pystar 🐍",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1538993399587557377/4v1vvvgt_normal.png",
+      "screen_name": "pystar",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700269768954269847"
+      ],
+      "editable_until_msecs": "1694214477000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "parent": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "lang": "en",
+    "favorite_count": 6,
+    "created_at": "2023-09-08T21:46:16.000Z",
+    "display_text_range": [
+      0,
+      167
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [],
+      "symbols": []
+    },
+    "id_str": "1700264313750245624",
+    "text": "Interesting approach to augment context window away, proxy your API calls, run RAG context augmentation during chat calls, &lt;100ms is impressive! \n\nVery interesting!",
+    "user": {
+      "id_str": "5721582",
+      "name": "Alex Volkov",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1562195233693380610/IuNqAMFz_normal.jpg",
+      "screen_name": "altryne",
+      "verified": false,
+      "is_blue_verified": true,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700264313750245624"
+      ],
+      "editable_until_msecs": "1694213176000",
+      "is_edit_eligible": true,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 0,
+    "news_action_type": "conversation",
+    "quoted_tweet": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  },
+  {
+    "__typename": "Tweet",
+    "in_reply_to_screen_name": "raunakdoesdev",
+    "in_reply_to_status_id_str": "1700215444542750923",
+    "in_reply_to_user_id_str": "883163260886720512",
+    "lang": "en",
+    "favorite_count": 0,
+    "created_at": "2023-09-08T21:28:08.000Z",
+    "display_text_range": [
+      28,
+      126
+    ],
+    "entities": {
+      "hashtags": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "id_str": "883163260886720512",
+          "indices": [
+            0,
+            14
+          ],
+          "name": "Raunak Chowdhuri",
+          "screen_name": "raunakdoesdev"
+        },
+        {
+          "id_str": "1603793509840035842",
+          "indices": [
+            15,
+            27
+          ],
+          "name": "Helicone",
+          "screen_name": "helicone_ai"
+        }
+      ],
+      "symbols": []
+    },
+    "id_str": "1700259749709971678",
+    "text": "@raunakdoesdev @helicone_ai If this thing is real then it’s really gonna be a hit for long text summarization task using LLMs.",
+    "user": {
+      "id_str": "965616465536692225",
+      "name": "Amit Vyas",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1661609457288110081/b0-ec0LY_normal.jpg",
+      "screen_name": "thevyasamit",
+      "verified": false,
+      "is_blue_verified": false,
+      "profile_image_shape": "Circle"
+    },
+    "edit_control": {
+      "edit_tweet_ids": [
+        "1700259749709971678"
+      ],
+      "editable_until_msecs": "1694212088000",
+      "is_edit_eligible": false,
+      "edits_remaining": "5"
+    },
+    "conversation_count": 1,
+    "news_action_type": "conversation",
+    "parent": {
+      "lang": "en",
+      "reply_count": 94,
+      "retweet_count": 168,
+      "favorite_count": 1626,
+      "possibly_sensitive": false,
+      "created_at": "2023-09-08T18:32:05.000Z",
+      "display_text_range": [
+        0,
+        280
+      ],
+      "entities": {
+        "hashtags": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "id_str": "1603793509840035842",
+            "indices": [
+              221,
+              233
+            ],
+            "name": "Helicone",
+            "screen_name": "helicone_ai"
+          }
+        ],
+        "symbols": [],
+        "media": [
+          {
+            "display_url": "pic.twitter.com/KteJxWApww",
+            "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+            "indices": [
+              281,
+              304
+            ],
+            "url": "https://t.co/KteJxWApww"
+          }
+        ]
+      },
+      "id_str": "1700215444542750923",
+      "text": "I just built an infinite memory system for LLM chats: Remembrall.\n\nAdd a UID to your OpenAI call and I'll manage inserting past chat history into the context window with &lt; 100ms latency.\n\n2 lines of code to integrate. @helicone_ai style monitoring for free. DM for beta access. https://t.co/KteJxWApww",
+      "user": {
+        "id_str": "883163260886720512",
+        "name": "Raunak Chowdhuri",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1672704549151461376/aR56JmFZ_normal.jpg",
+        "screen_name": "raunakdoesdev",
+        "verified": false,
+        "is_blue_verified": true,
+        "profile_image_shape": "Circle"
+      },
+      "edit_control": {
+        "edit_tweet_ids": [
+          "1700215444542750923"
+        ],
+        "editable_until_msecs": "1694201525000",
+        "is_edit_eligible": false,
+        "edits_remaining": "5"
+      },
+      "mediaDetails": [
+        {
+          "display_url": "pic.twitter.com/KteJxWApww",
+          "expanded_url": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "ext_media_availability": {
+            "status": "Available"
+          },
+          "indices": [
+            281,
+            304
+          ],
+          "media_url_https": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "original_info": {
+            "height": 1898,
+            "width": 1636,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 916
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1636
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1865
+              },
+              {
+                "x": 687,
+                "y": 0,
+                "w": 949,
+                "h": 1898
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "w": 1636,
+                "h": 1898
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "h": 1898,
+              "resize": "fit",
+              "w": 1636
+            },
+            "medium": {
+              "h": 1200,
+              "resize": "fit",
+              "w": 1034
+            },
+            "small": {
+              "h": 680,
+              "resize": "fit",
+              "w": 586
+            },
+            "thumb": {
+              "h": 150,
+              "resize": "crop",
+              "w": 150
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/KteJxWApww"
+        }
+      ],
+      "photos": [
+        {
+          "backgroundColor": {
+            "red": 204,
+            "green": 214,
+            "blue": 221
+          },
+          "cropCandidates": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 916
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1636
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1865
+            },
+            {
+              "x": 687,
+              "y": 0,
+              "w": 949,
+              "h": 1898
+            },
+            {
+              "x": 0,
+              "y": 0,
+              "w": 1636,
+              "h": 1898
+            }
+          ],
+          "expandedUrl": "https://twitter.com/raunakdoesdev/status/1700215444542750923/photo/1",
+          "url": "https://pbs.twimg.com/media/F5hfcbSaMAEr06b.jpg",
+          "width": 1636,
+          "height": 1898
+        }
+      ],
+      "isEdited": false,
+      "isStaleEdit": false
+    },
+    "isEdited": false,
+    "isStaleEdit": false
+  }
+]

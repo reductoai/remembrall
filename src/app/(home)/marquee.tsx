@@ -5,28 +5,9 @@ import Marquee from "~/components/magicui/marquee";
 import { getTweet, type Tweet } from "react-tweet/api";
 import Image from "next/image";
 import Link from "next/link";
+import tweets from "./tweets.json";
 
-const reviews1 = [
-  "1700442300747264331",
-  "1700528249342705694",
-  "1700518619568808169",
-  "1700512261066850775",
-  "1700455160479109247",
-  "1700438323909595207",
-  "1700344834081395026",
-];
-const reviews2 = [
-  "1700294427334385799",
-  "1700357676788539760",
-  "1700323722220167202",
-  "1700288991218565387",
-  "1700269768954269847",
-  "1700264313750245624",
-  "1700259749709971678",
-];
-
-const ReviewCard = async ({ id }: { id: string }) => {
-  const tweet = (await getTweet(id)) as Tweet;
+const ReviewCard = async ({ tweet }: { tweet: Tweet }) => {
   return (
     <figure
       className={cn(
@@ -93,13 +74,13 @@ export const MarqueeDemo = () => {
   return (
     <div className="relative flex h-fit w-screen flex-col items-center justify-center gap-4 overflow-hidden rounded-lg  border bg-background py-8">
       <Marquee pauseOnHover className="[--duration:90s]">
-        {reviews1.map((review) => (
-          <ReviewCard key={review} id={review} />
+        {tweets.slice(0, tweets.length / 2).map((tweet: any, idx) => (
+          <ReviewCard key={idx} tweet={tweet as Tweet} />
         ))}
       </Marquee>
       <Marquee reverse pauseOnHover className="[--duration:90s]">
-        {reviews2.map((review) => (
-          <ReviewCard key={review} id={review} />
+        {tweets.slice(tweets.length / 2).map((tweet: any, idx) => (
+          <ReviewCard key={idx} tweet={tweet as Tweet} />
         ))}
       </Marquee>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-gray-950"></div>
