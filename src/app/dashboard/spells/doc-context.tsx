@@ -198,7 +198,7 @@ export function DisplayDocContexts() {
             className="cursor-pointer"
             onClick={() => {
               console.log("Clicked", docContext.id);
-              push(`/spells/docs/${docContext.id}`);
+              push(`/dashboard/spells/docs/${docContext.id}`);
             }}
           >
             <TableCell className="font-medium">{docContext.name}</TableCell>

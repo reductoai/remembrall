@@ -26,7 +26,7 @@ export default function Document({ params }: { params: { doc: string } }) {
   const router = useRouter();
   const doc = api.vector.docContext.useQuery(params.doc, {
     onError: (err) => {
-      router.push("/spells");
+      router.push("/dashboard/spells");
     },
   });
 
@@ -34,7 +34,7 @@ export default function Document({ params }: { params: { doc: string } }) {
 
   return (
     <div className="flex flex-col space-y-2">
-      <Link href="/spells" className="flex flex-row items-center">
+      <Link href="/dashboard/spells" className="flex flex-row items-center">
         <ChevronLeft className="mr-2" />
         Document Contexts
       </Link>
