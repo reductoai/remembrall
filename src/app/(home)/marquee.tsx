@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import tweets from "./tweets.json";
 
-const ReviewCard = async ({ tweet }: { tweet: Tweet }) => {
+const ReviewCard = async ({ tweet }: { tweet: (typeof tweets)[0] }) => {
   return (
     <figure
       className={cn(
@@ -25,19 +25,19 @@ const ReviewCard = async ({ tweet }: { tweet: Tweet }) => {
             width="32"
             height="32"
             alt=""
-            src={tweet.user.profile_image_url_https}
+            src={tweet.user?.profile_image_url_https ?? ""}
           />
           <div className="flex flex-col items-start">
             <figcaption className="text-ellipsis whitespace-nowrap text-sm font-medium dark:text-white">
-              {tweet.user.name}
+              {tweet.user?.name}
             </figcaption>
             <p className="text-xs font-medium dark:text-white/40">
-              {tweet.user.screen_name}
+              {tweet.user?.screen_name}
             </p>
           </div>
         </div>
         <Link
-          href={`https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`}
+          href={`https://twitter.com/${tweet.user?.screen_name}/status/${tweet?.id_str}`}
         >
           <svg
             stroke="currentColor"
@@ -71,16 +71,17 @@ const ReviewCard = async ({ tweet }: { tweet: Tweet }) => {
 };
 
 export const MarqueeDemo = () => {
+  const twt = tweets.filter((tweet) => tweet.text);
   return (
     <div className="relative flex h-fit w-screen flex-col items-center justify-center gap-4 overflow-hidden rounded-lg  border bg-background py-8">
       <Marquee pauseOnHover className="[--duration:90s]">
-        {tweets.slice(0, tweets.length / 2).map((tweet: any, idx) => (
-          <ReviewCard key={idx} tweet={tweet as Tweet} />
+        {twt.slice(0, tweets.length / 2).map((tweet, idx) => (
+          <ReviewCard key={idx} tweet={tweet} />
         ))}
       </Marquee>
       <Marquee reverse pauseOnHover className="[--duration:90s]">
-        {tweets.slice(tweets.length / 2).map((tweet: any, idx) => (
-          <ReviewCard key={idx} tweet={tweet as Tweet} />
+        {twt.slice(tweets.length / 2).map((tweet: any, idx) => (
+          <ReviewCard key={idx} tweet={tweet} />
         ))}
       </Marquee>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-gray-950"></div>
