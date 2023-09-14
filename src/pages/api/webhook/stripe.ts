@@ -31,6 +31,8 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
           const subscription = await stripe.subscriptions.retrieve(
             subscriptionId as string
           );
+
+          console.log(JSON.stringify(subscription.metadata));
           const userId = subscription.metadata.userId;
           await prisma.user.update({
             where: {
@@ -52,6 +54,8 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
             const subscription = event.data.object as Stripe.Subscription;
             const userId = subscription.metadata.userId;
 
+            console.log(JSON.stringify(subscription.metadata));
+
             // update user with subscription data
             await prisma.user.update({
               where: {
@@ -69,6 +73,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
         .with({ type: "customer.subscription.deleted" }, async () => {
           const subscription = event.data.object as Stripe.Subscription;
           const userId = subscription.metadata.userId;
+          console.log(JSON.stringify(subscription.metadata));
           await prisma.user.update({
             where: {
               id: userId,

@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { getLogsCode } from "~/app/dashboard/settings/code";
 import Docs from "~/app/dashboard/settings/docs";
 import Options from "~/app/dashboard/settings/options";
+import { StripeDashboard } from "~/app/dashboard/settings/stripe";
 
 export default async function Settings() {
   const code = await getLogsCode();
@@ -14,6 +15,7 @@ export default async function Settings() {
       <CardContent className="grid w-full gap-4">
         <Options />
         <Docs code={code} />
+        <StripeDashboard />
       </CardContent>
     </Card>
   );
