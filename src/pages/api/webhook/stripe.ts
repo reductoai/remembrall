@@ -24,7 +24,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
 
       console.log("Received event: ", event);
 
-      match(event)
+      await match(event)
         .with({ type: "invoice.paid" }, async (event) => {
           const invoice = event.data.object as Stripe.Invoice;
           const subscriptionId = invoice.subscription;
