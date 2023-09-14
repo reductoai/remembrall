@@ -8,7 +8,7 @@ import { stripe } from "~/server/stripe/client";
 
 const webhookSecret = env.STRIPE_WEBHOOK_SECRET;
 
-export default async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   const buf = await buffer(req);
   const sig = req.headers["stripe-signature"];
   let event: Stripe.Event;
