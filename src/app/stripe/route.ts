@@ -4,19 +4,7 @@ import { prisma } from "~/server/db";
 import type Stripe from "stripe";
 import { buffer } from "micro";
 import { match, P } from "ts-pattern";
-// import {
-//   handleInvoicePaid,
-//   handleSubscriptionCanceled,
-//   handleSubscriptionCreatedOrUpdated,
-// } from "../../server/stripe/stripe-webhook-handlers";
-import { stripe } from "../../server/stripe/client";
-
-// Stripe requires the raw body to construct the event.
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+import { stripe } from "~/server/stripe/client";
 
 const webhookSecret = env.STRIPE_WEBHOOK_SECRET;
 
