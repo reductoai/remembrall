@@ -325,6 +325,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
   }
 
   if (params.stream) {
+    console.log("STREAMING Request");
     params.temperature = 0; // enforce consistency
 
     const start = +new Date();

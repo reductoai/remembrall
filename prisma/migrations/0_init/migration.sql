@@ -20,6 +20,7 @@ CREATE TABLE "Request" (
     "numTokens" INTEGER NOT NULL,
     "duration" INTEGER NOT NULL,
     "userId" TEXT NOT NULL,
+    "memoryUpdate" JSONB,
 
     CONSTRAINT "Request_pkey" PRIMARY KEY ("id")
 );
@@ -56,6 +57,18 @@ CREATE TABLE "DocumentContext" (
     "chunkSize" INTEGER NOT NULL,
 
     CONSTRAINT "DocumentContext_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Memory" (
+    "id" TEXT NOT NULL DEFAULT (concat('m-', gen_random_uuid()))::TEXT,
+    "content" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "storeId" TEXT NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "embedding" vector NOT NULL,
+
+    CONSTRAINT "Memory_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -119,6 +132,9 @@ CREATE UNIQUE INDEX "Snippet_id_key" ON "Snippet"("id");
 CREATE UNIQUE INDEX "DocumentContext_id_key" ON "DocumentContext"("id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Memory_id_key" ON "Memory"("id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "User_apiKey_key" ON "User"("apiKey");
 
 -- CreateIndex
@@ -155,16 +171,22 @@ ALTER TABLE "Document" ADD CONSTRAINT "Document_contextId_fkey" FOREIGN KEY ("co
 ALTER TABLE "DocumentContext" ADD CONSTRAINT "DocumentContext_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Memory" ADD CONSTRAINT "Memory_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
-create or replace function match_snippets (
+
+
+create or replace function match_memories (
   query_embedding vector(1536),
   match_threshold float,
   match_count int,
-  context_id text
+  user_id text,
+  store_id text
 )
 returns table (
   id text,
@@ -174,13 +196,13 @@ returns table (
 language sql stable
 as $$
   select
-    "Snippet".id,
-    "Snippet".content,
-    1 - ("Snippet".embedding <=> query_embedding) as similarity
-  from "Snippet"
-  inner join "Document" on "Document"."id" = "Snippet"."documentId"
-  where 1 - ("Snippet".embedding <=> query_embedding) > match_threshold
-  and "Document"."contextId" = context_id
+    "Memory".id,
+    "Memory".content,
+    1 - ("Memory".embedding <=> query_embedding) as similarity
+  from "Memory"
+  where 1 - ("Memory".embedding <=> query_embedding) > match_threshold
+  and "Memory"."userId" = user_id
+  and "Memory"."storeId" = store_id
   order by similarity desc
   limit match_count;
 $$;

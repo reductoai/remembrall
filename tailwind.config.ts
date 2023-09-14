@@ -149,8 +149,8 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         marquee: "marquee var(--duration) linear infinite",
-        spin: "spin calc(var(--speed) * 2) infinite linear",
-        slide: "slide var(--speed) ease-in-out infinite alternate",
+        coolspin: "spin calc(var(--speed) * 2) infinite linear",
+        coolslide: "slide var(--speed) ease-in-out infinite alternate",
       },
       keyframes: {
         "accordion-down": {

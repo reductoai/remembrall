@@ -77,6 +77,19 @@ model User {
   sessions        Session[]
   DocumentContext DocumentContext[]
   Memory          Memory[]
+  stripeId        String?
+  subscription    Subscription?
+}
+
+enum Subscription {
+  incomplete
+  incomplete_expired
+  trialing
+  active
+  past_due
+  canceled
+  unpaid
+  paused
 }
 
 model Account {
