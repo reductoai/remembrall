@@ -43,6 +43,9 @@ export default function Hello() {
               <Badge className="hidden sm:inline-block">Beta</Badge>
             </Link>
             <div className="flex flex-row items-center space-x-2">
+              <Link className="mr-4 text-lg text-foreground" href="#pricing">
+                Pricing
+              </Link>
               <Link
                 href="https://discord.gg/97W5uAbp2f"
                 className={buttonVariants({
@@ -101,7 +104,10 @@ export default function Hello() {
           </div>
 
           <div className="flex flex-col space-y-4 py-12">
-            <h2 className=" text-center text-5xl font-semibold leading-none tracking-tight text-foreground ">
+            <h2
+              id="pricing"
+              className="text-center text-5xl font-semibold leading-none tracking-tight text-foreground "
+            >
               Pricing
             </h2>
             <p className="mx-auto max-w-2xl pb-8 text-center text-2xl text-muted-foreground">

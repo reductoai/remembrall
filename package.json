@@ -7,7 +7,8 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/stripe --latest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.2.0",
@@ -47,6 +48,7 @@
     "llm-api": "^0.9.5",
     "lucide-react": "^0.268.0",
     "markdown-it": "^13.0.1",
+    "micro": "^10.0.1",
     "next": "13.4.19",
     "next-auth": "^4.22.1",
     "next-themes": "^0.2.1",
@@ -61,6 +63,7 @@
     "remark-gfm": "^3.0.1",
     "shiki": "^0.14.3",
     "shiki-processor": "^0.1.3",
+    "stripe": "^13.5.0",
     "superjson": "1.12.2",
     "tailwindcss-animate": "^1.0.6",
     "ts-pattern": "^5.0.5",

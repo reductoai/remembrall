@@ -28,6 +28,11 @@ export const env = createEnv({
     SUPABASE_API_KEY: z.string(),
     NEXT_PUBLIC_POSTHOG_HOST: z.string(),
     NEXT_PUBLIC_POSTHOG_KEY: z.string(),
+    STRIPE_PK: z.string(),
+    STRIPE_SK: z.string(),
+    STRIPE_PRICE_ID_BASE: z.string(),
+    STRIPE_PRICE_ID_FULL: z.string(),
+    STRIPE_WEBHOOK_SECRET: z.string(),
   },
 
   /**
@@ -57,6 +62,11 @@ export const env = createEnv({
     SUPABASE_API_KEY: process.env.SUPABASE_API_KEY,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    STRIPE_PK: process.env.STRIPE_PK,
+    STRIPE_SK: process.env.STRIPE_SK,
+    STRIPE_PRICE_ID_BASE: process.env.STRIPE_PRICE_ID_BASE,
+    STRIPE_PRICE_ID_FULL: process.env.STRIPE_PRICE_ID_FULL,
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

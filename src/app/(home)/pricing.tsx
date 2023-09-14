@@ -1,11 +1,14 @@
-import { Check, SeparatorHorizontal } from "lucide-react";
+"use client";
+
+import { Check } from "lucide-react";
+import Link from "next/link";
 import { MagicCard, MagicContainer } from "~/components/magicui/magic-card";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
-import Playground from "../dashboard/playground/page";
-import Link from "next/link";
+import { api } from "~/trpc/client";
 
 export function Pricing() {
+  const checkout = api.stripe.createCheckoutSession.useMutation();
   return (
     <MagicContainer
       className={
@@ -53,7 +56,7 @@ export function Pricing() {
         className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl"
       >
         <p className="z-10 mb-8 text-xl text-muted-foreground">Starter</p>
-        <p className="z-10 text-2xl text-foreground">$100/month</p>
+        <p className="z-10 text-2xl text-foreground">$50/month</p>
 
         <Separator className="z-10 mb-4 mt-10" />
 
@@ -63,7 +66,7 @@ export function Pricing() {
           </div>
           <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
             <Check className="mr-2 h-4 w-4 stroke-primary" />
-            {"Long-term Memory API for < 50 UIDs"}
+            {"Long-term Memory API"}
           </div>
           <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
             <Check className="mr-2 h-4 w-4 stroke-primary" />
@@ -74,8 +77,14 @@ export function Pricing() {
             Instant Chat Replay
           </div>
         </div>
-        <Button className="z-10 mt-16 w-full rounded-full" asChild>
-          <Link href="/dashboard">Get Started</Link>
+        <Button
+          className="z-10 mt-16 w-full rounded-full"
+          loading={checkout.isLoading && checkout.variables === "base"}
+          onClick={() => {
+            checkout.mutate("base");
+          }}
+        >
+          Get Started
         </Button>
         {/* <p className="">Unlimited Playground Usage</p> */}
       </MagicCard>
@@ -84,7 +93,7 @@ export function Pricing() {
         className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl"
       >
         <p className="z-10 mb-8 text-xl text-muted-foreground">Full</p>
-        <p className="z-10 text-2xl text-foreground">$1000/month</p>
+        <p className="z-10 text-2xl text-foreground">$250/month</p>
 
         <Separator className="z-10 mb-4 mt-10" />
 
@@ -94,11 +103,11 @@ export function Pricing() {
           </div>
           <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
             <Check className="mr-2 h-4 w-4 stroke-primary" />
-            Unlimited Memory Stores and UIDs
+            Access Memory Stores Programmatically
           </div>
           <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
             <Check className="mr-2 h-4 w-4 stroke-primary" />
-            PDF Document Contexts
+            Document Context API
           </div>
           <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
             <Check className="mr-2 h-4 w-4 stroke-primary" />
@@ -107,10 +116,13 @@ export function Pricing() {
         </div>
         <Button
           className="z-10 mt-16 w-full rounded-full"
-          asChild
+          onClick={() => {
+            checkout.mutate("base");
+          }}
           variant={"secondary"}
+          loading={checkout.isLoading && checkout.variables === "full"}
         >
-          <Link href="/dashboard">Get Started</Link>
+          Get Started
         </Button>
       </MagicCard>
     </MagicContainer>
