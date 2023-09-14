@@ -22,6 +22,8 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     try {
       event = stripe.webhooks.constructEvent(buf, sig as string, webhookSecret);
 
+      console.log("Received event: ", event);
+
       match(event)
         .with({ type: "invoice.paid" }, async (event) => {
           const invoice = event.data.object as Stripe.Invoice;
