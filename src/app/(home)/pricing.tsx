@@ -6,9 +6,22 @@ import { MagicCard, MagicContainer } from "~/components/magicui/magic-card";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { api } from "~/trpc/client";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export function Pricing() {
-  const checkout = api.stripe.createCheckoutSession.useMutation();
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  const checkout = api.stripe.createCheckoutSession.useMutation({
+    onMutate: (data) => {
+      if (!session?.user) router.push(`/login?purchase=${data}`);
+    },
+    onSuccess: (data) => {
+      if (data.checkoutUrl) router.push(data.checkoutUrl);
+    },
+  });
+
   return (
     <MagicContainer
       className={
@@ -117,7 +130,7 @@ export function Pricing() {
         <Button
           className="z-10 mt-16 w-full rounded-full"
           onClick={() => {
-            checkout.mutate("base");
+            checkout.mutate("full");
           }}
           variant={"secondary"}
           loading={checkout.isLoading && checkout.variables === "full"}
