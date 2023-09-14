@@ -34,7 +34,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
 
           console.log(JSON.stringify(subscription.metadata));
           const userId = subscription.metadata.userId;
-          await prisma.user.update({
+          const res = await prisma.user.update({
             where: {
               id: userId,
             },
@@ -42,6 +42,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
               subscription: subscription.status,
             },
           });
+          console.log("Updated: ", res);
         })
         .with(
           {
@@ -57,7 +58,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
             console.log(JSON.stringify(subscription.metadata));
 
             // update user with subscription data
-            await prisma.user.update({
+            const res = await prisma.user.update({
               where: {
                 id: userId,
               },
@@ -65,6 +66,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
                 subscription: subscription.status,
               },
             });
+            console.log("Updated: ", res);
           }
         )
         .with({ type: "invoice.payment_failed" }, async () => {
@@ -74,7 +76,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
           const subscription = event.data.object as Stripe.Subscription;
           const userId = subscription.metadata.userId;
           console.log(JSON.stringify(subscription.metadata));
-          await prisma.user.update({
+          const res = await prisma.user.update({
             where: {
               id: userId,
             },
@@ -82,6 +84,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
               subscription: null,
             },
           });
+          console.log("Updated: ", res);
         })
         .otherwise(() => {});
 
