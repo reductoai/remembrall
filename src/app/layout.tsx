@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import Providers, { PHProvider, PostHogPageview } from "~/app/providers";
@@ -10,10 +11,13 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Remembrall",
   description: "LLM observability platform",
   icons: [{ rel: "icon", url: "/logo.png" }],
+  verification: {
+    google: "Zms-QuPbqTyS04dP9kyznU4lZ0Z5iDgpIkjKCaEM2Aw",
+  },
   openGraph: {
     images: [
       {
