@@ -1,5 +1,6 @@
 "use server";
 
+import { Paywall } from "~/app/(home)/pricing";
 import { getUsersCode } from "~/app/dashboard/settings/code";
 import Docs from "~/app/dashboard/settings/docs";
 
@@ -15,6 +16,10 @@ export default async function Remember() {
         persisted and recalled dynamically as necessary.
       </p>
       <Docs code={code} />
+
+      <Paywall>
+        <br />
+      </Paywall>
     </div>
   );
 }
