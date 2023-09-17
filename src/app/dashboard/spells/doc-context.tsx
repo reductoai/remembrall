@@ -240,7 +240,8 @@ export function DisplayDocContexts() {
                     <Button
                       disabled={deleteDocContext.isLoading}
                       variant="destructive"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         deleteDocContext.mutate(docContext.id);
                       }}
                     >
