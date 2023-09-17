@@ -51,6 +51,7 @@ export default function AddTextDocument({
     onSuccess: () => {
       addDocForm.reset();
       context.vector.docContexts.invalidate();
+      context.vector.docContext.invalidate();
     },
     onError: (error) => {
       toast({

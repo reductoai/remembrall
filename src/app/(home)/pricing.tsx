@@ -9,7 +9,21 @@ import { api } from "~/trpc/client";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-export function Pricing() {
+export function Paywall({ children }: { children: React.ReactNode }) {
+  const user = api.settings.getUser.useQuery();
+  if (!user.data) return <p>Loading...</p>;
+  if (user.data.subscription === "active") return <>{children}</>;
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center space-y-8">
+      <p className="text-center text-2xl text-foreground">
+        Subscribe to access this feature.
+      </p>
+      <Pricing hideFree />
+    </div>
+  );
+}
+
+export function Pricing({ hideFree }: { hideFree?: boolean }) {
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -28,42 +42,44 @@ export function Pricing() {
         "mx-auto flex w-full max-w-7xl flex-col gap-4 px-8 md:flex-row lg:p-0"
       }
     >
-      <MagicCard
-        borderWidth={3}
-        className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl"
-      >
-        <p className="z-10 mb-8 text-xl text-muted-foreground">Free</p>
-        <p className="z-10 text-2xl text-foreground">Free for everyone</p>
-
-        <Separator className="z-10 mb-4 mt-10" />
-
-        <div className="flex flex-col space-y-2">
-          <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
-            <Check className="mr-2 h-4 w-4 stroke-primary" />
-            Unlimited Playground Usage
-          </div>
-          <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
-            <Check className="mr-2 h-4 w-4 stroke-primary" />
-            Unlimited LLM Calls
-          </div>
-          <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
-            <Check className="mr-2 h-4 w-4 stroke-primary" />
-            Full Observability
-          </div>
-          <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
-            <Check className="mr-2 h-4 w-4 stroke-primary" />
-            Unlimited Data Export
-          </div>
-        </div>
-        <Button
-          className="z-10 mt-16 w-full rounded-full"
-          variant={"outline"}
-          asChild
+      {!hideFree ? (
+        <MagicCard
+          borderWidth={3}
+          className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl"
         >
-          <Link href="/dashboard">Get Started</Link>
-        </Button>
-        {/* <p className="">Unlimited Playground Usage</p> */}
-      </MagicCard>
+          <p className="z-10 mb-8 text-xl text-muted-foreground">Free</p>
+          <p className="z-10 text-2xl text-foreground">Free for everyone</p>
+
+          <Separator className="z-10 mb-4 mt-10" />
+
+          <div className="flex flex-col space-y-2">
+            <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
+              <Check className="mr-2 h-4 w-4 stroke-primary" />
+              Unlimited Playground Usage
+            </div>
+            <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
+              <Check className="mr-2 h-4 w-4 stroke-primary" />
+              Unlimited LLM Calls
+            </div>
+            <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
+              <Check className="mr-2 h-4 w-4 stroke-primary" />
+              Full Observability
+            </div>
+            <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
+              <Check className="mr-2 h-4 w-4 stroke-primary" />
+              Unlimited Data Export
+            </div>
+          </div>
+          <Button
+            className="z-10 mt-16 w-full rounded-full"
+            variant={"outline"}
+            asChild
+          >
+            <Link href="/dashboard">Get Started</Link>
+          </Button>
+          {/* <p className="">Unlimited Playground Usage</p> */}
+        </MagicCard>
+      ) : null}
       <MagicCard
         borderWidth={3}
         className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl"
