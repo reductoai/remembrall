@@ -1,6 +1,7 @@
 "use server";
 
 import { BrainIcon, FileStack, HistoryIcon } from "lucide-react";
+import { getRagCode } from "~/app/dashboard/settings/code";
 
 import {
   CreateDocContext,
@@ -8,8 +9,10 @@ import {
 } from "~/app/dashboard/spells/doc-context";
 import Remember from "~/app/dashboard/spells/remember";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import Docs from "~/app/dashboard/settings/docs";
 
 export default async function Spells() {
+  const code = await getRagCode();
   return (
     <div className="w-full min-w-[600px]">
       <Tabs defaultValue="history" className="h-fit w-full">
@@ -26,7 +29,8 @@ export default async function Spells() {
         <TabsContent value="history">
           <Remember />
         </TabsContent>
-        <TabsContent value="doc" className="flex flex-col space-y-2 p-2">
+        <TabsContent value="doc" className="flex flex-col space-y-4 p-2">
+          <Docs code={code} />
           <CreateDocContext />
           <DisplayDocContexts />
         </TabsContent>

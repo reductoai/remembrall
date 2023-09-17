@@ -4,7 +4,9 @@ import { ChevronLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import AddTextDocument from "~/app/dashboard/spells/docs/[doc]/add-doc";
+import AddTextDocument, {
+  AddPdfDocument,
+} from "~/app/dashboard/spells/docs/[doc]/add-doc";
 import { DocChatPlayground } from "~/app/dashboard/spells/docs/[doc]/playground";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -76,7 +78,7 @@ export default function Document({ params }: { params: { doc: string } }) {
                 <TabsTrigger value="text" className="w-fit">
                   Text
                 </TabsTrigger>
-                <TabsTrigger value="pdf" disabled className="w-fit">
+                <TabsTrigger value="pdf" className="w-fit">
                   PDF <Badge className="ml-2">Coming Soon</Badge>
                 </TabsTrigger>
               </TabsList>
@@ -84,6 +86,9 @@ export default function Document({ params }: { params: { doc: string } }) {
             <CardContent>
               <TabsContent value="text" className="w-full">
                 {doc.data && <AddTextDocument docContextId={doc.data.id} />}
+              </TabsContent>
+              <TabsContent value="pdf" className="w-full">
+                {doc.data && <AddPdfDocument docContextId={doc.data.id} />}
               </TabsContent>
             </CardContent>
           </Tabs>

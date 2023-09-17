@@ -4,13 +4,31 @@ import "./src/env.mjs";
 const config = {
   experimental: {
     serverActions: true,
-    serverComponentsExternalPackages: ["shiki", "vscode-oniguruma"],
+    serverComponentsExternalPackages: ["shiki", "vscode-oniguruma", "canvas"],
   },
   compiler: {
     styledComponents: true,
   },
   images: {
     domains: ["avatars.githubusercontent.com", "pbs.twimg.com"],
+  },
+
+  webpack: (config, { webpack }) => {
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    };
+    config.externals.push({
+      sharp: "commonjs sharp",
+      canvas: "commonjs canvas",
+    });
+    // config.plugins.push(
+    //   new webpack.ProvidePlugin({
+    //     Buffer: ["buffer", "Buffer"],
+    //     process: "process/browser",
+    //   })
+    // );
+    return config;
   },
 
   async headers() {

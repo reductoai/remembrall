@@ -191,6 +191,92 @@ print(completion.choices[0].message)
 \`\`\`
 `;
 
+const CurlRag = `
+\`\`\`bash
+curl https://api.openai.com/v1/chat/completions // [!code --] \\
+curl https://remembrall.dev/api/openai/v1/chat/completions // [!code ++] \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer $OPENAI_API_KEY" \\
+  -H "x-gp-api-key: $RMBR_API_KEY" // [!code ++] \\
+  -H "x-gp-context: dc-document-code-here" // [!code ++] \\
+  -d '{
+    "model": "gpt-3.5-turbo",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'
+`;
+
+const JSRag = `
+\`\`\`js
+fetch("https://api.openai.com/v1/chat/completions", { // [!code --]
+fetch("https://remembrall.dev/api/openai/v1/chat/completions", { // [!code ++]
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: \`Bearer \${process.env.OPENAI_API_KEY}\`,
+    "x-gp-api-key": \`\${process.env.RMBR_API_KEY}\`, // [!code ++]
+    "x-gp-context": "dc-document-code-here" // [!code ++]
+  },
+  body: JSON.stringify({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: "Hello world" }],
+  }),
+})
+\`\`\`
+`;
+
+const NodejsRag = `
+
+\`\`\`js
+import { Configuration, OpenAIApi } from "openai";
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+  basePath: "https://api.openai.com/v1",  // [!code --]
+  basePath: "https://remembrall.dev/api/openai/v1",  // [!code ++]
+  baseOptions: { // [!code ++:5]
+    headers: {
+      "x-gp-api-key": \`Bearer \${process.env.RMBR_API_KEY}\`,  // [!code ++]
+      "x-gp-context": "dc-document-code-here", // [!code ++]
+    },
+  }
+});
+
+const openai = new OpenAIApi(configuration);
+
+const completion = await openai.createChatCompletion({
+  model: "gpt-3.5-turbo",
+  messages: [
+    { role: "system", content: "You are a helpful assistant." },
+    { role: "user", content: "Hello world" },
+  ],
+});
+\`\`\`
+`;
+
+const PythonRag = `
+\`\`\`python
+import os
+import openai
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_base = "https://api.openai.com/v1"  // [!code --]
+openai.api_base = "https://remembrall.dev/api/openai/v1"  // [!code ++]
+
+completion = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "user", "content": "Hello!"}
+  ],
+  headers={
+    "x-gp-api-key": os.getenv("RMBR_API_KEY"), // [!code ++]
+    "x-gp-context": "dc-document-code-here", // [!code ++]
+  }
+)
+
+print(completion.choices[0].message)
+\`\`\`
+`;
+
 const highlighterConfig = {
   theme: "material-theme-palenight",
   processors: [
@@ -281,5 +367,15 @@ export async function getLogsCode(): Promise<CodeResults> {
     js: renderer.render(JSLogs),
     nodejs: renderer.render(NodejsLogs),
     python: renderer.render(PythonLogs),
+  };
+}
+
+export async function getRagCode(): Promise<CodeResults> {
+  const renderer = await getMarkdownItInstance();
+  return {
+    curl: renderer.render(CurlRag),
+    js: renderer.render(JSRag),
+    nodejs: renderer.render(NodejsRag),
+    python: renderer.render(PythonRag),
   };
 }
