@@ -17,6 +17,7 @@ export const settingsRouter = createTRPCRouter({
       z.object({
         name: z.string().optional(),
         apiKey: z.string().optional(),
+        memoryPrompt: z.string().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {

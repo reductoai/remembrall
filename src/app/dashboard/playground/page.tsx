@@ -34,28 +34,29 @@ export default function Playground() {
   const [context, setContext] = useState(false);
   const [contextId, setContextId] = useState("");
 
-  const { handleSubmit, messages, input, handleInputChange } = useChat({
-    api: "/api/chat",
-    body: {
-      apiKey: user.data?.apiKey,
-      remember: history ? session : undefined,
-      context: context ? contextId : undefined,
-    },
-    initialMessages: loadedMessages
-      ? JSON.parse(loadedMessages).map((m: any) => ({ ...m, id: v4() }))
-      : [
-          {
-            id: "0",
-            role: "system",
-            content: "You are a helpful agent",
-          },
-          {
-            id: "1",
-            role: "assistant",
-            content: "Hello, how are you?",
-          },
-        ],
-  });
+  const { handleSubmit, messages, input, handleInputChange, setMessages } =
+    useChat({
+      api: "/api/chat",
+      body: {
+        apiKey: user.data?.apiKey,
+        remember: history ? session : undefined,
+        context: context ? contextId : undefined,
+      },
+      initialMessages: loadedMessages
+        ? JSON.parse(loadedMessages).map((m: any) => ({ ...m, id: v4() }))
+        : [
+            {
+              id: "0",
+              role: "system",
+              content: "You are a helpful agent",
+            },
+            {
+              id: "1",
+              role: "assistant",
+              content: "Hello, how are you?",
+            },
+          ],
+    });
 
   return (
     <div className="flex h-full flex-col justify-between">
@@ -111,8 +112,15 @@ export default function Playground() {
           <div>
             <Label>System Message</Label>
             <Textarea
-              readOnly
               value={messages[0]?.role === "system" ? messages[0].content : ""}
+              disabled={messages[0]?.role !== "system"}
+              onChange={(e) => {
+                setMessages(
+                  messages.map((m, i) =>
+                    i === 0 ? { ...m, content: e.target.value } : m
+                  )
+                );
+              }}
             />
           </div>
           {messages

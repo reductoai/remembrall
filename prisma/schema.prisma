@@ -78,6 +78,7 @@ model User {
   DocumentContext DocumentContext[]
   Memory          Memory[]
   stripeId        String?
+  memoryPrompt    String?
   subscription    Subscription?
 }
 

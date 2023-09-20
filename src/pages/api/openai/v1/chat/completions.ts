@@ -7,6 +7,7 @@ import * as z from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import { env } from "~/env.mjs";
 import { splitOpenaiStream } from "~/lib/openai/streaming";
+import { DEFAULT_MEMORY_PROMPT } from "~/lib/prompts/memory";
 
 const memorySchema = z.array(
   z.object({
@@ -101,7 +102,7 @@ async function logRequest(
       messages: [
         {
           role: "system",
-          content: `Given the messages from the user, update or create relevant ~1 sentence memories below that could be useful in the future. Example memories: "User's name is Billy", "user likes chocolate", "user has a cofounder." Memories are facts that the user has provided that would be useful to remember for future conversations. Useful facts to remember are the names of people, locations, places, etc. They should be very short and brief, only encoding the relevant facts. If nothing is relevant as a fact, just provide an empty memory list. Only modify facts that are relevant to the conversation.`,
+          content: user.data.memoryPrompt ?? DEFAULT_MEMORY_PROMPT,
         },
         { role: "user", content: "History to generate facts for: " + history },
       ],

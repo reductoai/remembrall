@@ -3,6 +3,7 @@
 import { Paywall } from "~/app/(home)/pricing";
 import { getUsersCode } from "~/app/dashboard/settings/code";
 import Docs from "~/app/dashboard/settings/docs";
+import { EditMemoryPrompt } from "~/app/dashboard/spells/prompt";
 
 export default async function Remember() {
   const code = await getUsersCode();
@@ -16,7 +17,7 @@ export default async function Remember() {
         persisted and recalled dynamically as necessary.
       </p>
       <Docs code={code} />
-
+      <EditMemoryPrompt />
       <Paywall>
         <br />
       </Paywall>

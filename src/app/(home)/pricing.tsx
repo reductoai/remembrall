@@ -43,10 +43,7 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
       }
     >
       {!hideFree ? (
-        <MagicCard
-          borderWidth={3}
-          className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl"
-        >
+        <MagicCard className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl">
           <p className="z-10 mb-8 text-xl text-muted-foreground">Free</p>
           <p className="z-10 text-2xl text-foreground">Free for everyone</p>
 
@@ -80,10 +77,7 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
           {/* <p className="">Unlimited Playground Usage</p> */}
         </MagicCard>
       ) : null}
-      <MagicCard
-        borderWidth={3}
-        className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl"
-      >
+      <MagicCard className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl">
         <p className="z-10 mb-8 text-xl text-muted-foreground">Starter</p>
         <p className="z-10 text-2xl text-foreground">$50/month</p>
 
@@ -117,10 +111,7 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
         </Button>
         {/* <p className="">Unlimited Playground Usage</p> */}
       </MagicCard>
-      <MagicCard
-        borderWidth={3}
-        className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl"
-      >
+      <MagicCard className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl">
         <p className="z-10 mb-8 text-xl text-muted-foreground">Full</p>
         <p className="z-10 text-2xl text-foreground">$250/month</p>
 
