@@ -98,7 +98,7 @@ async function logRequest(
 
     const memoryCall = await openai.chat.completions.create({
       model: "gpt-3.5-turbo-0613",
-      temperature: 0.2,
+      temperature: 0.0,
       messages: [
         {
           role: "system",
