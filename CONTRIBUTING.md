@@ -5,16 +5,13 @@
 ```
 git clone https://github.com/raunakdoesdev/remembrall.git && cd remembrall
 ```
-3. Install Infisical (secret mgmt):
-```
-brew install infisical/get-cli/infisical
-infisical login
-```
+3. Grab the .env from raunak
 4. Install dependencies:
 ```
 pnpm i
 ```
 5. Run the app:
 ```
-infisical run -- pnpm run dev
+pnpm run dev
 ```
+
