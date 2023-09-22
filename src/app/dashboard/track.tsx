@@ -13,6 +13,8 @@ export default function Track({ children }: { children: React.ReactNode }) {
     if (user.data) {
       posthog.identify(user.data.id, {
         email: user.data.email,
+        name: user.data.name,
+        github: user.data.gh_username,
       });
     }
   }, [user.data, posthog]);
