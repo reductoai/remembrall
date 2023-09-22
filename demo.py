@@ -5,18 +5,20 @@ import os
 dotenv.load_dotenv()
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
-openai.api_base = "https://remembrall.dev/api/openai/v1"
+openai.api_base = "http://localhost:3000/api/openai/v1"
+
+
 
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   messages=[
     {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "Do you know my favorite color?"},
+    {"role": "user", "content": "What about the US? Provide the population too."},
   ],
   headers={
-    "x-gp-api-key": os.environ["GP_API_KEY"],
-    # "x-gp-remember": "sep10",
-    # "x-gp-context": "dc-9c83c217-b5c6-4f94-b42f-7dd181c011e3",
+    "x-gp-api-key": "gp-dc0e0d2d-ff10-4345-b5fe-e427ce541fab",
+    "x-gp-remember": "test1",
+    "x-gp-short": "true",
   },
 )
 

@@ -61,6 +61,20 @@ model Memory {
   embedding Unsupported("vector")
 }
 
+enum Role {
+  assistant
+  user
+}
+
+model History {
+  id      String @id @unique @default(dbgenerated("gen_random_uuid()"))
+  content String
+  role    Role
+  storeId String
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model User {
   id              String            @id @default(cuid())
   name            String?
@@ -80,6 +94,7 @@ model User {
   stripeId        String?
   memoryPrompt    String?
   subscription    Subscription?
+  History         History[]
 }
 
 enum Subscription {

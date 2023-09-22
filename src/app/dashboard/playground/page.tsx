@@ -50,11 +50,6 @@ export default function Playground() {
               role: "system",
               content: "You are a helpful agent",
             },
-            {
-              id: "1",
-              role: "assistant",
-              content: "Hello, how are you?",
-            },
           ],
     });
 

@@ -8,7 +8,8 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhook/stripe --latest --live"
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhook/stripe --latest --live",
+    "supabase:types": "pnpx supabase gen types typescript --project-id \"sdsvbguavftnoqoziksh\" > src/server/supabase.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.2.0",

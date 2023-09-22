@@ -1,13 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextFetchEvent, NextRequest } from "next/server";
 import OpenAI from "openai";
-import { ChatCompletion } from "openai/resources/chat";
+import { ChatCompletion, ChatCompletionMessage } from "openai/resources/chat";
 import { v4 } from "uuid";
 import * as z from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import { env } from "~/env.mjs";
 import { splitOpenaiStream } from "~/lib/openai/streaming";
 import { DEFAULT_MEMORY_PROMPT } from "~/lib/prompts/memory";
+import { Database } from "~/server/supabase";
 
 const memorySchema = z.array(
   z.object({
@@ -29,9 +30,13 @@ export const config = {
   runtime: "edge",
 };
 
-const supabaseClient = createClient(env.SUPABASE_URL, env.SUPABASE_API_KEY, {
-  auth: { persistSession: false },
-});
+const supabaseClient = createClient<Database>(
+  env.SUPABASE_URL,
+  env.SUPABASE_API_KEY,
+  {
+    auth: { persistSession: false },
+  }
+);
 
 export type MemoryDiff = (
   | {
@@ -52,13 +57,37 @@ async function logRequest(
   response: OpenAI.Chat.Completions.ChatCompletion,
   duration: number,
   persist: string | null,
-  memories: VectorResponse[] | null
+  memories: VectorResponse[] | null,
+  headers: Headers
 ) {
   const user = await supabaseClient
     .from("User")
     .select("*")
     .match({ apiKey: apiKey })
     .single();
+
+  if (!user.data) {
+    throw new Error("User not found");
+  }
+
+  if (headers && headers.get("x-gp-short") && persist) {
+    console.log("Inserting");
+    const history = await supabaseClient.from("History").insert([
+      {
+        role: params.messages.at(-1)?.role as "assistant" | "user",
+        content: params.messages.at(-1)?.content ?? "",
+        storeId: persist,
+        userId: user.data.id,
+      },
+      {
+        role: response.choices[0].message.role as "assistant" | "user",
+        content: response.choices[0].message.content!,
+        storeId: persist,
+        userId: user.data.id,
+      },
+    ]);
+    console.log("Inserting finished ", history);
+  }
 
   await fetch("https://api.us-east.tinybird.co/v0/events?name=llm_call", {
     method: "POST",
@@ -152,11 +181,9 @@ async function logRequest(
         const newMemories = updates.filter((memory) => !memory.id);
         const insert = await supabaseClient.from("Memory").insert(
           newMemories.map((m) => {
-            return { ...m, id: v4() };
+            return { ...(m as any), id: v4() };
           })
         );
-
-        console.log("insert", insert);
 
         // update existing memories (with id) with supabase
         const existingMemories = updates.filter((memory) => memory.id);
@@ -166,8 +193,8 @@ async function logRequest(
               .from("Memory")
               .update({
                 content: memory.content,
-                embedding: memory.embedding,
-                updatedAt: memory.updatedAt,
+                embedding: memory.embedding as any,
+                updatedAt: memory.updatedAt as any,
               })
               .match({ id: memories![memory.id! - 1].id });
           })
@@ -200,7 +227,7 @@ async function logRequest(
     },
   ]);
 
-  console.log("IMPORTANT: ", res);
+  console.log("Inserted ", JSON.stringify(res));
 }
 
 type VectorResponse = {
@@ -208,6 +235,35 @@ type VectorResponse = {
   content: string;
   similarity: number;
 };
+
+function calculateCharacters(messages: ChatCompletionMessage[]): number {
+  return messages.reduce(
+    (total, message) => total + (message.content ? message.content.length : 0),
+    0
+  );
+}
+
+const MAX_CHARACTERS = 10000;
+
+function handleOverflow(messages: ChatCompletionMessage[]) {
+  // Check if the total messages exceed the limit
+  while (
+    calculateCharacters(messages) > MAX_CHARACTERS &&
+    messages.length > 2
+  ) {
+    messages.splice(1, 1); // Remove the second oldest message, keeping the system message intact
+  }
+
+  // Check if any single message exceeds the limit
+  for (let i = 0; i < messages.length; i++) {
+    const message = messages[i];
+    if (message.content && message.content.length > MAX_CHARACTERS) {
+      // Truncate the message and add an ellipsis
+      message.content =
+        message.content.substring(0, MAX_CHARACTERS - 3) + "...";
+    }
+  }
+}
 
 export default async function handler(req: NextRequest, event: NextFetchEvent) {
   if (req.method !== "POST")
@@ -257,6 +313,29 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       .match({ apiKey: apiKey })
       .single();
 
+    if (!user.data) {
+      throw new Error("User not found");
+    }
+
+    if (req.headers.get("x-gp-short")) {
+      const history = await supabaseClient
+        .from("History")
+        .select("*")
+        .match({ storeId: persist, userId: user.data.id })
+        .order("id", { ascending: false })
+        .limit(20);
+
+      if (history.data)
+        params.messages = [
+          ...params.messages.filter((message) => message.role === "system"),
+          ...history.data!.map((message) => ({
+            role: message.role,
+            content: message.content,
+          })),
+          ...params.messages.filter((message) => message.role !== "system"),
+        ];
+    }
+
     const embedding = (
       await openai.embeddings.create({
         model: "text-embedding-ada-002",
@@ -264,10 +343,8 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       })
     ).data[0]!.embedding;
 
-    console.log("Matching context: ", context);
-
     const memReq = await supabaseClient.rpc("match_memories", {
-      query_embedding: embedding,
+      query_embedding: embedding as any,
       match_threshold: 0.5, // Choose an appropriate threshold for your data
       match_count: 5, // Choose the number of matches
       store_id: persist,
@@ -288,7 +365,6 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
   }
 
   if (context) {
-    console.log("Retrieving context from ", context);
     const contextData = await supabaseClient
       .from("DocumentContext")
       .select("*")
@@ -297,7 +373,9 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
       })
       .single();
 
-    console.log("Context data: ", contextData);
+    if (!contextData.data) {
+      throw new Error("Context not found");
+    }
 
     let prependMessage = contextData.data.context;
 
@@ -310,7 +388,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
 
     const { data: snippets }: { data: VectorResponse[] | null } =
       await supabaseClient.rpc("match_snippets", {
-        query_embedding: embedding,
+        query_embedding: embedding as any,
         match_threshold: 0.5, // Choose an appropriate threshold for your data
         match_count: 5, // Choose the number of matches
         context_id: context,
@@ -325,8 +403,10 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
     prependSystemMessage(prependMessage);
   }
 
+  // handle overflow
+  handleOverflow(params.messages);
+
   if (params.stream) {
-    console.log("STREAMING Request");
     params.temperature = 0; // enforce consistency
 
     const start = +new Date();
@@ -353,7 +433,8 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
         result,
         +new Date() - start,
         persist,
-        memories
+        memories,
+        req.headers
       );
     }
 
@@ -379,7 +460,8 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
         response,
         +new Date() - start,
         persist,
-        memories
+        memories,
+        req.headers
       )
     );
 
