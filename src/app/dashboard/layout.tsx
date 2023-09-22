@@ -1,3 +1,6 @@
+"use server";
+
+import Track from "~/app/dashboard/track";
 import { Sidebar } from "~/components/sidebar";
 
 export default async function Home({
@@ -6,13 +9,13 @@ export default async function Home({
   children: React.ReactNode;
 }) {
   return (
-    <main className="h-screen">
+    <Track>
       <div className="flex h-full flex-row">
         <Sidebar className="w-full max-w-[16rem]" />
         <div className="h-screen min-w-0 grow overflow-auto border-l p-4">
           {children}
         </div>
       </div>
-    </main>
+    </Track>
   );
 }

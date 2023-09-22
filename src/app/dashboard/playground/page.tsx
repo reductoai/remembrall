@@ -21,6 +21,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { usePostHog } from "posthog-js/react";
+import { ChatRequestOptions } from "ai";
 
 export default function Playground() {
   const searchParams = useSearchParams();
@@ -33,6 +35,8 @@ export default function Playground() {
   const [history, setHistory] = useState(false);
   const [context, setContext] = useState(false);
   const [contextId, setContextId] = useState("");
+
+  const posthog = usePostHog();
 
   const { handleSubmit, messages, input, handleInputChange, setMessages } =
     useChat({
@@ -52,6 +56,14 @@ export default function Playground() {
             },
           ],
     });
+
+  const handleSubmitWrapper = (
+    e: React.FormEvent<HTMLFormElement>,
+    chatRequestOptions?: ChatRequestOptions
+  ) => {
+    posthog.capture("playground_chat");
+    handleSubmit(e, chatRequestOptions);
+  };
 
   return (
     <div className="flex h-full flex-col justify-between">
@@ -140,7 +152,7 @@ export default function Playground() {
       </div>
       <form
         className="flex w-full items-center space-x-2"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmitWrapper}
       >
         <Input
           value={input}
