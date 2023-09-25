@@ -112,8 +112,8 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
         {/* <p className="">Unlimited Playground Usage</p> */}
       </MagicCard>
       <MagicCard className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl">
-        <p className="z-10 mb-8 text-xl text-muted-foreground">Full</p>
-        <p className="z-10 text-2xl text-foreground">$250/month</p>
+        <p className="z-10 mb-8 text-xl text-muted-foreground">Enterprise</p>
+        <p className="z-10 text-2xl text-foreground">Contact Us</p>
 
         <Separator className="z-10 mb-4 mt-10" />
 
@@ -136,13 +136,11 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
         </div>
         <Button
           className="z-10 mt-16 w-full rounded-full"
-          onClick={() => {
-            checkout.mutate("full");
-          }}
           variant={"secondary"}
           loading={checkout.isLoading && checkout.variables === "full"}
+          asChild
         >
-          Get Started
+          <Link href="mailto:sales@reducto.ai">Contact Us</Link>
         </Button>
       </MagicCard>
     </MagicContainer>

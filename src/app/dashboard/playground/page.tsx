@@ -28,13 +28,21 @@ export default function Playground() {
   const searchParams = useSearchParams();
   const loadedMessages = searchParams?.get("messages");
 
-  const user = api.settings.getUser.useQuery();
   const contexts = api.vector.docContexts.useQuery();
 
   const [session, setSession] = useState("");
   const [history, setHistory] = useState(false);
   const [context, setContext] = useState(false);
   const [contextId, setContextId] = useState("");
+
+  const user = api.settings.getUser.useQuery(undefined, {
+    onSuccess: (data) => {
+      if (data.gh_username) {
+        setSession(data.gh_username);
+        setHistory(true);
+      }
+    },
+  });
 
   const posthog = usePostHog();
 
