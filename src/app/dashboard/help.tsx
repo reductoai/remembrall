@@ -1,31 +1,21 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
+import { LayoutDashboard, MessagesSquare, Wand2, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
-import { LayoutDashboard, MessagesSquare, Wand2, X } from "lucide-react";
 
 import {
-  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "~/components/ui/command";
 
-import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Settings,
-  Smile,
-  User,
-} from "lucide-react";
+import { Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export function Help() {
