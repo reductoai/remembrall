@@ -43,6 +43,7 @@
     "ai": "^2.2.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "cmdk": "^0.2.0",
     "date-fns": "^2.30.0",
     "eventsource-parser": "^1.0.0",
     "framer-motion": "^10.16.1",

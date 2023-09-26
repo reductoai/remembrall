@@ -4,7 +4,29 @@ import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { LayoutDashboard, MessagesSquare, Wand2, X } from "lucide-react";
+
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "~/components/ui/command";
+
+import {
+  Calculator,
+  Calendar,
+  CreditCard,
+  Settings,
+  Smile,
+  User,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function Help() {
   const [showHelp, setShowHelp] = useState(false);
@@ -18,8 +40,66 @@ export function Help() {
     setShowHelp(value);
   };
 
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((open) => !open);
+      }
+    };
+
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
+
+  const router = useRouter();
+
   return (
     <AnimatePresence>
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandInput placeholder="Type a command or search..." />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Pages">
+            <CommandItem onSelect={() => router.push("/dashboard")}>
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              <span>Dashboard</span>
+            </CommandItem>
+            <CommandItem onSelect={() => router.push("/dashboard/playground")}>
+              <MessagesSquare className="mr-2 h-4 w-4" />
+              <span>Playground</span>
+            </CommandItem>
+            <CommandItem onSelect={() => router.push("/dashboard/spells")}>
+              <Wand2 className="mr-2 h-4 w-4" />
+              <span>Spells</span>
+            </CommandItem>
+            <CommandItem onSelect={() => router.push("/dashboard/settings")}>
+              <Settings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
+            </CommandItem>
+          </CommandGroup>
+          {/* <CommandSeparator />
+          <CommandGroup heading="Settings">
+            <CommandItem>
+              <User className="mr-2 h-4 w-4" />
+              <span>Profile</span>
+              <CommandShortcut>⌘P</CommandShortcut>
+            </CommandItem>
+            <CommandItem>
+              <CreditCard className="mr-2 h-4 w-4" />
+              <span>Billing</span>
+              <CommandShortcut>⌘B</CommandShortcut>
+            </CommandItem>
+            <CommandItem>
+              <Settings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
+              <CommandShortcut>⌘S</CommandShortcut>
+            </CommandItem>
+          </CommandGroup> */}
+        </CommandList>
+      </CommandDialog>
+
       {showHelp && (
         <motion.div className="border-1 flex w-full max-w-[16rem] flex-col space-y-2 border-l p-6 text-sm">
           <X
