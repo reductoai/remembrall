@@ -62,19 +62,39 @@ export function Help() {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Pages">
-            <CommandItem onSelect={() => router.push("/dashboard")}>
+            <CommandItem
+              onSelect={() => {
+                router.push("/dashboard");
+                setOpen(false);
+              }}
+            >
               <LayoutDashboard className="mr-2 h-4 w-4" />
               <span>Dashboard</span>
             </CommandItem>
-            <CommandItem onSelect={() => router.push("/dashboard/playground")}>
+            <CommandItem
+              onSelect={() => {
+                router.push("/dashboard/playground");
+                setOpen(false);
+              }}
+            >
               <MessagesSquare className="mr-2 h-4 w-4" />
               <span>Playground</span>
             </CommandItem>
-            <CommandItem onSelect={() => router.push("/dashboard/spells")}>
+            <CommandItem
+              onSelect={() => {
+                router.push("/dashboard/spells");
+                setOpen(false);
+              }}
+            >
               <Wand2 className="mr-2 h-4 w-4" />
               <span>Spells</span>
             </CommandItem>
-            <CommandItem onSelect={() => router.push("/dashboard/settings")}>
+            <CommandItem
+              onSelect={() => {
+                router.push("/dashboard/settings");
+                setOpen(false);
+              }}
+            >
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
             </CommandItem>
