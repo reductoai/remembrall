@@ -4,11 +4,9 @@ import { ChevronLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Pricing } from "~/app/(home)/pricing";
 import AddTextDocument, {
   AddPdfDocument,
 } from "~/app/dashboard/spells/docs/[doc]/add-doc";
-import { DocChatPlayground } from "~/app/dashboard/spells/docs/[doc]/playground";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
@@ -88,7 +86,6 @@ export default function Document({ params }: { params: { doc: string } }) {
             </CardContent>
           </Tabs>
         </Card>
-        <DocChatPlayground />
       </div>
 
       <Separator className="my-4" />
