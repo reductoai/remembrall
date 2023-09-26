@@ -1,5 +1,6 @@
 "use server";
 
+import { Help } from "~/app/dashboard/help";
 import Track from "~/app/dashboard/track";
 import { Sidebar } from "~/components/sidebar";
 
@@ -15,6 +16,7 @@ export default async function Home({
         <div className="h-screen min-w-0 grow overflow-auto border-l p-4">
           {children}
         </div>
+        <Help />
       </div>
     </Track>
   );
