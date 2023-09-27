@@ -325,7 +325,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
         .from("History")
         .select("*")
         .match({ storeId: persist, userId: user.data.id })
-        .order("id", { ascending: false })
+        .order("id", { ascending: true })
         .limit(20);
 
       if (history.data)

@@ -13,11 +13,11 @@ completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   messages=[
     {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": "What about the US? Provide the population too."},
+    {"role": "user", "content": "Use Fermi estimation."},
   ],
   headers={
     "x-gp-api-key": "gp-dc0e0d2d-ff10-4345-b5fe-e427ce541fab",
-    "x-gp-remember": "test1",
+    "x-gp-remember": "test2",
     "x-gp-short": "true",
   },
 )
