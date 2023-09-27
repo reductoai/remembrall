@@ -71,15 +71,18 @@ async function logRequest(
   }
 
   if (headers && headers.get("x-gp-short") && persist) {
+    const DATE_TIME = new Date().toISOString();
     console.log("Inserting");
     const history = await supabaseClient.from("History").insert([
       {
+        id: DATE_TIME + "A",
         role: params.messages.at(-1)?.role as "assistant" | "user",
         content: params.messages.at(-1)?.content ?? "",
         storeId: persist,
         userId: user.data.id,
       },
       {
+        id: DATE_TIME + "B",
         role: response.choices[0].message.role as "assistant" | "user",
         content: response.choices[0].message.content!,
         storeId: persist,
