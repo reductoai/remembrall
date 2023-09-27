@@ -1,17 +1,14 @@
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
+import HomepageChat from "~/app/(home)/chat";
 import Dark from "~/app/(home)/dark";
 import { MarqueeDemo } from "~/app/(home)/marquee";
 import { Pricing } from "~/app/(home)/pricing";
-import Globe from "~/components/magicui/globe";
 import GridPattern from "~/components/magicui/grid-pattern";
 import LinearGradient from "~/components/magicui/linear-gradient";
-import RadialGradient from "~/components/magicui/radial-gradient";
 import ShimmerButton from "~/components/magicui/shimmer-button";
 import { Badge } from "~/components/ui/badge";
-import { Button, buttonVariants } from "~/components/ui/button";
+import { buttonVariants } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 
 export default function Hello() {
@@ -94,6 +91,7 @@ export default function Hello() {
 
         <div className="relative -mt-8 h-fit w-screen pt-8">
           <LinearGradient to="rgb(120,119,198,0.2)" direction="bottom right" />
+
           <div className="relative mx-auto flex aspect-video w-full max-w-6xl rounded-lg border bg-background p-5 shadow-2xl">
             <iframe
               src="https://www.loom.com/embed/5956651e8d394650bbd40267d0af95bb?sid=cd88a03b-0fc5-4bc9-9e0a-ce90fc24d370?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
@@ -101,6 +99,21 @@ export default function Hello() {
               allowFullScreen
               className="h-full w-full rounded-lg"
             ></iframe>
+          </div>
+
+          <div className="relative mx-auto grid w-full max-w-6xl grid-cols-2 gap-4 py-8">
+            <div className="flex flex-col space-y-8">
+              <h3 className="whitespace-pre-wrap bg-gradient-to-b from-black to-gray-800/90 bg-clip-text text-center text-4xl font-semibold leading-none tracking-tight text-transparent dark:from-white dark:to-slate-300/90 md:text-6xl">
+                No Memory
+              </h3>
+              <HomepageChat vanilla={true} />
+            </div>
+            <div className="flex flex-col space-y-8">
+              <h3 className="whitespace-pre-wrap bg-gradient-to-b from-black to-gray-800/90 bg-clip-text text-center text-4xl font-semibold leading-none tracking-tight text-transparent dark:from-white dark:to-slate-300/90 md:text-6xl">
+                With Memory
+              </h3>
+              <HomepageChat />
+            </div>
           </div>
 
           <div className="flex flex-col space-y-4 py-12">
