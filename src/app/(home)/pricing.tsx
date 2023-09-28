@@ -164,7 +164,7 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
           }}
           className="z-10 mt-2 flex flex-row text-sm text-muted-foreground underline"
         >
-          or self-onboard @ $1000/month + $0.008/API call
+          or self-onboard @ $2000/month + $0.008/API call
         </div>
       </MagicCard>
     </MagicContainer>
