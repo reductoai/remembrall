@@ -74,7 +74,7 @@ export default function HomepageChat({ vanilla }: { vanilla?: boolean }) {
                   message.role === "user"
                     ? "ml-auto bg-muted"
                     : "bg-primary text-primary-foreground",
-                  vanilla ? "bg-muted" : ""
+                  vanilla ? "bg-muted text-foreground" : ""
                 )}
               >
                 {message.content}
