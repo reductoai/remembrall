@@ -1,6 +1,6 @@
 "use client";
 
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 import { MagicCard, MagicContainer } from "~/components/magicui/magic-card";
 import { Button } from "~/components/ui/button";
@@ -8,6 +8,8 @@ import { Separator } from "~/components/ui/separator";
 import { api } from "~/trpc/client";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useToast } from "~/components/ui/use-toast";
+import { usePostHog } from "posthog-js/react";
 
 export function Paywall({ children }: { children: React.ReactNode }) {
   const user = api.settings.getUser.useQuery();
@@ -35,6 +37,9 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
       if (data.checkoutUrl) router.push(data.checkoutUrl);
     },
   });
+
+  const toast = useToast();
+  const posthog = usePostHog();
 
   return (
     <MagicContainer
@@ -104,6 +109,7 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
           className="z-10 mt-16 w-full rounded-full"
           loading={checkout.isLoading && checkout.variables === "base"}
           onClick={() => {
+            posthog.capture("base-checkout-click");
             checkout.mutate("base");
           }}
         >
@@ -114,9 +120,7 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
       <MagicCard className="mx-auto flex w-full max-w-md cursor-pointer flex-col items-center justify-center overflow-hidden px-8 py-12 shadow-2xl">
         <p className="z-10 mb-8 text-xl text-muted-foreground">Enterprise</p>
         <p className="z-10 text-2xl text-foreground">Contact Us</p>
-
         <Separator className="z-10 mb-4 mt-10" />
-
         <div className="flex flex-col space-y-2">
           <div className="z-10 flex flex-row items-center text-base text-muted-foreground">
             Everything in starter plus:
@@ -140,8 +144,28 @@ export function Pricing({ hideFree }: { hideFree?: boolean }) {
           loading={checkout.isLoading && checkout.variables === "full"}
           asChild
         >
-          <Link href="mailto:sales@reducto.ai">Contact Us</Link>
+          <Link
+            href="mailto:sales@reducto.ai"
+            onClick={() => {
+              posthog.capture("enterprise-contact-us-click");
+            }}
+          >
+            Contact Us
+          </Link>
         </Button>
+        <div
+          onClick={() => {
+            toast.toast({
+              title: "Self-Onboarding Coming Soon!",
+              description: "We're on this, will roll out it out ASAP.",
+            });
+
+            posthog.capture("self-onboarding-attempt");
+          }}
+          className="z-10 mt-2 flex flex-row text-sm text-muted-foreground underline"
+        >
+          or self-onboard @ $1000/month + $0.008/API call
+        </div>
       </MagicCard>
     </MagicContainer>
   );
