@@ -10,7 +10,12 @@ const config = {
     styledComponents: true,
   },
   images: {
-    domains: ["avatars.githubusercontent.com", "pbs.twimg.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 
   webpack: (config, { webpack }) => {
