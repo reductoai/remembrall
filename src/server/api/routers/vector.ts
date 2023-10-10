@@ -67,10 +67,11 @@ export const vectorRouter = createTRPCRouter({
         },
       });
 
+      const cleanContent = stripNonUTF8Chars(input.content);
       const doc = await prisma.document.create({
         data: {
           name: input.name,
-          content: input.content.slice(0, context.chunkSize),
+          content: cleanContent.slice(0, context.chunkSize),
           contextId: input.contextId,
         },
       });
@@ -96,12 +97,19 @@ export const vectorRouter = createTRPCRouter({
         return chunks;
       }
 
-      const chunks = chunkString(input.content, context.chunkSize);
+      function stripNonUTF8Chars(input: string): string {
+        const encoder = new TextEncoder();
+        const decoder = new TextDecoder();
+        const utf8Array = encoder.encode(input);
+        return decoder.decode(utf8Array);
+      }
+
+      const chunks = chunkString(cleanContent, context.chunkSize);
 
       async function embedChunk(chunk: string) {
         const embeddingResponse = await openai.embeddings.create({
           model: "text-embedding-ada-002",
-          input: input.content,
+          input: chunk,
         });
 
         if (!embeddingResponse.data[0]?.embedding)
