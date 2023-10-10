@@ -70,7 +70,7 @@ export const vectorRouter = createTRPCRouter({
       const doc = await prisma.document.create({
         data: {
           name: input.name,
-          content: input.content,
+          content: input.content.slice(0, context.chunkSize),
           contextId: input.contextId,
         },
       });
