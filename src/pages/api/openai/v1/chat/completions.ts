@@ -402,7 +402,7 @@ export default async function handler(req: NextRequest, event: NextFetchEvent) {
         (snippet, idx) => `${idx + 1}. ${snippet.content.replace(/\n/g, " ")}`
       )
       .join("\n");
-    prependMessage += `\n${content}`;
+    prependMessage += `\n${contextData.data.name}\n:${content}`;
     prependSystemMessage(prependMessage);
   }
 
