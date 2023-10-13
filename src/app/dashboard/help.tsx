@@ -155,7 +155,7 @@ export function Help() {
         <>
           <Button
             variant={"outline"}
-            className="fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border-2 text-2xl shadow-xl"
+            className="fixed bottom-12 right-4 flex h-12 w-12 items-center justify-center rounded-full border-2 text-2xl shadow-xl"
             onClick={() => {
               setSaveShowHelp(true);
             }}
