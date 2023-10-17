@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { NextFetchEvent, NextRequest } from "next/server";
 import OpenAI from "openai";
 import { ChatCompletion, ChatCompletionMessage } from "openai/resources/chat";
+import { PostHog } from "posthog-node";
 import { v4 } from "uuid";
 import * as z from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
@@ -69,6 +70,21 @@ async function logRequest(
   if (!user.data) {
     throw new Error("User not found");
   }
+
+  const posthogClient = new PostHog(env.NEXT_PUBLIC_POSTHOG_KEY, {
+    host: env.NEXT_PUBLIC_POSTHOG_HOST,
+    flushAt: 1,
+    flushInterval: 0,
+  });
+
+  posthogClient.capture({
+    event: "api_call",
+    distinctId: user.data.id,
+    properties: {
+      model: params.model,
+      duration,
+    },
+  });
 
   if (headers && headers.get("x-gp-short") && persist) {
     const DATE_TIME = new Date().toISOString();
