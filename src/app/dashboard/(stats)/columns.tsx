@@ -49,11 +49,11 @@ export const columns: ColumnDef<Rows>[] = [
     accessorKey: "model",
     cell: ({ getValue }) => {
       const model = getValue() as string;
-      const color = modelColors[model]!;
+      const color = modelColors[model] ?? "gray";
       return (
         <Badge
           className=" whitespace-nowrap"
-          style={{ backgroundColor: color[500] }}
+          style={{ backgroundColor: color }}
         >
           {model}
         </Badge>
