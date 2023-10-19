@@ -53,7 +53,7 @@ export const columns: ColumnDef<Rows>[] = [
       return (
         <Badge
           className=" whitespace-nowrap"
-          style={{ backgroundColor: color }}
+          style={{ backgroundColor: colors[color][500] }}
         >
           {model}
         </Badge>
