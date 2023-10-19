@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { Loader2Icon } from "lucide-react";
 
 export default function LoginButton() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState("");
   const { toast } = useToast();
 
   // Get error message added by next/auth in URL.
@@ -27,7 +27,7 @@ export default function LoginButton() {
           <ToastAction
             altText="Try again"
             onClick={() => {
-              setLoading(true);
+              setLoading("github");
               signIn("github");
             }}
           >
@@ -35,7 +35,7 @@ export default function LoginButton() {
           </ToastAction>
         ),
       });
-      setLoading(false);
+      setLoading("");
     }
   }, [error, toast]);
 
@@ -44,9 +44,9 @@ export default function LoginButton() {
       <Button
         className="w-full"
         variant="outline"
-        disabled={loading}
+        disabled={loading === "github"}
         onClick={() => {
-          setLoading(true);
+          setLoading("github");
           signIn("github");
         }}
       >
@@ -68,9 +68,9 @@ export default function LoginButton() {
       <Button
         className="w-full"
         variant="outline"
-        disabled={loading}
+        disabled={loading === "google"}
         onClick={() => {
-          setLoading(true);
+          setLoading("google");
           signIn("google");
         }}
       >
