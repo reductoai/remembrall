@@ -1,9 +1,6 @@
 <h1 align="center">
     <a href="https://remembrall.dev">
-    <img src="public/GithubHeaderLight.svg">
-    </a>
-    <a href="https://remembrall.dev">
-    <img src="public/GithubHeader.svg">
+    <img src="public/GithubHeaderCombined.svg">
     </a>
 </h1>
 
