@@ -41,6 +41,11 @@ export default function Playground() {
         setSession(data.gh_username);
         setHistory(true);
       }
+
+      if (data.email && session === "") {
+        setSession(data.email);
+        setHistory(true);
+      }
     },
   });
 
