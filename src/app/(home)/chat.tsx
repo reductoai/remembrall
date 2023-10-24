@@ -2,7 +2,7 @@
 
 import { ChatRequestOptions } from "ai";
 import { useChat } from "ai/react";
-import { Send } from "lucide-react";
+import { Pause, Send } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
 import { v4 } from "uuid";
@@ -16,35 +16,36 @@ export default function HomepageChat({ vanilla }: { vanilla?: boolean }) {
 
   const posthog = usePostHog();
 
-  const { handleSubmit, messages, input, handleInputChange } = useChat({
-    api: "/api/chat",
-    body: {
-      apiKey: user.data?.apiKey ?? "gp-c56b8fc7-e7ab-424f-b438-a18796959525",
-      remember: vanilla ? undefined : "homepage",
-    },
-    initialMessages: [
-      {
-        id: "0",
-        role: "system",
-        content: vanilla
-          ? "You are an unhelpful agent. Be vague and generic. Keep asking the user for more info."
-          : "You are a helpful agent. Never be vague or generic. Make up information about the user if you don't have any. Don't ask the user for their preferences - just make them up.",
+  const { handleSubmit, messages, input, handleInputChange, isLoading, stop } =
+    useChat({
+      api: "/api/chat",
+      body: {
+        apiKey: "gp-c56b8fc7-e7ab-424f-b438-a18796959525",
+        remember: vanilla ? undefined : "homepage",
       },
-      {
-        id: "1",
-        role: "user",
-        content: "Can you recommmend me some shoes?",
-      },
-      {
-        id: "1",
-        role: "assistant",
-        content: vanilla
-          ? "I don't have specific information about your preferences or needs. Please provide more details about the type of shoes you're looking for, such as the occasion, style, and any specific requirements."
-          : "Sure! I know you love Nike and hypebeast fashion, so how about some" +
-            " Air Jordan 1 Retro High OG 'University Blue'? They are quite popular right now.",
-      },
-    ],
-  });
+      initialMessages: [
+        {
+          id: "0",
+          role: "system",
+          content: vanilla
+            ? "You are an unhelpful agent. Be vague and generic. Keep asking the user for more info."
+            : "You are a helpful agent. Never be vague or generic. Make up information about the user if you don't have any. Don't ask the user for their preferences - just make them up.",
+        },
+        {
+          id: "1",
+          role: "user",
+          content: "Can you recommmend me some shoes?",
+        },
+        {
+          id: "1",
+          role: "assistant",
+          content: vanilla
+            ? "I don't have specific information about your preferences or needs. Please provide more details about the type of shoes you're looking for, such as the occasion, style, and any specific requirements."
+            : "Sure! I know you love Nike and hypebeast fashion, so how about some" +
+              " Air Jordan 1 Retro High OG 'University Blue'? They are quite popular right now.",
+        },
+      ],
+    });
 
   const handleSubmitWrapper = (
     e: React.FormEvent<HTMLFormElement>,
@@ -84,20 +85,35 @@ export default function HomepageChat({ vanilla }: { vanilla?: boolean }) {
         onSubmit={handleSubmitWrapper}
       >
         <Input
+          autoComplete="off"
+          disabled={isLoading}
           value={input}
           onChange={handleInputChange}
           id="message"
           placeholder="Type your message..."
           className="flex-1"
         />
-        <Button
-          type="submit"
-          size="icon"
-          variant={vanilla ? "secondary" : "default"}
-        >
-          <Send className="h-4 w-4" />
-          <span className="sr-only">Send</span>
-        </Button>
+        {isLoading ? (
+          <Button
+            size="icon"
+            variant={vanilla ? "secondary" : "default"}
+            onClick={() => {
+              stop();
+            }}
+          >
+            <Pause className="h-4 w-4" />
+            <span className="sr-only">Stop</span>
+          </Button>
+        ) : (
+          <Button
+            type="submit"
+            size="icon"
+            variant={vanilla ? "secondary" : "default"}
+          >
+            <Send className="h-4 w-4" />
+            <span className="sr-only">Send</span>
+          </Button>
+        )}
       </form>
     </div>
   );

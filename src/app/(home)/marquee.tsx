@@ -11,7 +11,7 @@ const ReviewCard = async ({ tweet }: { tweet: (typeof tweets)[0] }) => {
   return (
     <figure
       className={cn(
-        "relative h-32 w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
+        "relative h-32 w-64 cursor-pointer overflow-hidden rounded-xl border p-4 transition-height duration-1000 delay-100 ease-in-out hover:h-fit hover:min-h-[8rem]",
         // light styles
         "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // dark styles
