@@ -58,7 +58,7 @@ export default function Hello() {
                   buttonVariants({
                     variant: "outline",
                   }),
-                  "group rounded-sm transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
+                  "group hidden rounded-sm transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2 md:flex"
                 )}
                 href={"https://link.reducto.ai/star"}
               >
@@ -71,7 +71,7 @@ export default function Hello() {
                   buttonVariants({
                     variant: "outline",
                   }),
-                  "hover:text- group rounded-sm transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
+                  "group hidden w-fit rounded-sm transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2 md:flex"
                 )}
                 href={"link.reducto.ai/star"}
               >
@@ -90,7 +90,7 @@ export default function Hello() {
                   buttonVariants({
                     variant: "outline",
                   }),
-                  "transition-all duration-300 hover:ring-2 hover:ring-primary hover:ring-offset-2"
+                  "ring-2 ring-primary transition-all duration-300 hover:ring-offset-2"
                 )}
               >
                 Get Started Now
@@ -108,89 +108,101 @@ export default function Hello() {
             <h1 className="max-w-[48rem] whitespace-pre-wrap bg-gradient-to-b from-black to-gray-800/90 bg-clip-text text-center text-6xl font-semibold leading-none tracking-tight text-transparent dark:from-white dark:to-slate-300/90 md:text-8xl">
               Long-term Memory for LLMs
             </h1>
+            <div className="flex max-w-6xl flex-col space-y-8">
+              <p className="max-w-[36rem] text-center text-lg leading-normal text-muted-foreground sm:text-xl sm:leading-8">
+                Add <b className="text-white">two lines</b> to your OpenAI call
+                to automatically{" "}
+                <b className="text-white">personalize responses</b> based on
+                past conversations or internal documents.
+              </p>
 
-            <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-              Add two lines of code to your OpenAI call to automatically
-              personalize responses based on past conversations or internal
-              docs.
-            </p>
-
-            <div className="flex flex-col items-center space-y-3">
-              <Link href="/dashboard">
-                <ShimmerButton className="w-fit">
-                  <span className="whitespace-pre-wrap bg-slate-200  bg-clip-text text-center text-sm font-semibold leading-none tracking-tight dark:text-transparent lg:text-2xl">
-                    Get Started Now
-                  </span>
-                </ShimmerButton>
-              </Link>
-              <h3 className="inline-flex space-x-6 text-muted-foreground">
-                Backed by{" "}
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="ml-2 mr-1"
-                >
-                  <g clip-path="url(#clip0_24_57)">
-                    <rect width="24" height="24" rx="5.4" fill="#FF5100"></rect>
+              <div className="flex flex-col items-center justify-center space-y-2">
+                <Link href="/dashboard">
+                  <ShimmerButton className="w-fit">
+                    <span className="whitespace-pre-wrap bg-slate-200  bg-clip-text text-center text-sm font-semibold leading-none tracking-tight dark:text-transparent lg:text-2xl">
+                      Get Started Now
+                    </span>
+                  </ShimmerButton>
+                </Link>
+                <h3 className="inline-flex space-x-6 text-muted-foreground">
+                  Backed by{" "}
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="ml-2 mr-1"
+                  >
+                    <g clip-path="url(#clip0_24_57)">
+                      <rect
+                        width="24"
+                        height="24"
+                        rx="5.4"
+                        fill="#FF5100"
+                      ></rect>
+                      <rect
+                        x="0.5"
+                        y="0.5"
+                        width="23"
+                        height="23"
+                        rx="4.9"
+                        stroke="#FF844B"
+                      ></rect>
+                      <path
+                        d="M7.54102 7.31818H9.28604L11.9458 11.9467H12.0552L14.715 7.31818H16.46L12.7662 13.5028V17.5H11.2349V13.5028L7.54102 7.31818Z"
+                        fill="white"
+                      ></path>
+                    </g>
                     <rect
                       x="0.5"
                       y="0.5"
                       width="23"
                       height="23"
                       rx="4.9"
-                      stroke="#FF844B"
+                      stroke="#FF5100"
+                      stroke-opacity="0.1"
                     ></rect>
-                    <path
-                      d="M7.54102 7.31818H9.28604L11.9458 11.9467H12.0552L14.715 7.31818H16.46L12.7662 13.5028V17.5H11.2349V13.5028L7.54102 7.31818Z"
-                      fill="white"
-                    ></path>
-                  </g>
-                  <rect
-                    x="0.5"
-                    y="0.5"
-                    width="23"
-                    height="23"
-                    rx="4.9"
-                    stroke="#FF5100"
-                    stroke-opacity="0.1"
-                  ></rect>
-                  <rect
-                    x="0.5"
-                    y="0.5"
-                    width="23"
-                    height="23"
-                    rx="4.9"
-                    stroke="url(#paint0_radial_24_57)"
-                  ></rect>
-                  <defs>
-                    <radialGradient
-                      id="paint0_radial_24_57"
-                      cx="0"
-                      cy="0"
-                      r="1"
-                      gradientUnits="userSpaceOnUse"
-                      gradientTransform="translate(7.35) rotate(58.475) scale(34.1384)"
-                    >
-                      <stop stop-color="white" stop-opacity="0.56"></stop>
-                      <stop
-                        offset="0.28125"
-                        stop-color="white"
-                        stop-opacity="0"
-                      ></stop>
-                    </radialGradient>
-                    <clipPath id="clip0_24_57">
-                      <rect width="24" height="24" rx="5.4" fill="white"></rect>
-                    </clipPath>
-                  </defs>
-                </svg>{" "}
-                Combinator
-              </h3>
+                    <rect
+                      x="0.5"
+                      y="0.5"
+                      width="23"
+                      height="23"
+                      rx="4.9"
+                      stroke="url(#paint0_radial_24_57)"
+                    ></rect>
+                    <defs>
+                      <radialGradient
+                        id="paint0_radial_24_57"
+                        cx="0"
+                        cy="0"
+                        r="1"
+                        gradientUnits="userSpaceOnUse"
+                        gradientTransform="translate(7.35) rotate(58.475) scale(34.1384)"
+                      >
+                        <stop stop-color="white" stop-opacity="0.56"></stop>
+                        <stop
+                          offset="0.28125"
+                          stop-color="white"
+                          stop-opacity="0"
+                        ></stop>
+                      </radialGradient>
+                      <clipPath id="clip0_24_57">
+                        <rect
+                          width="24"
+                          height="24"
+                          rx="5.4"
+                          fill="white"
+                        ></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>{" "}
+                  Combinator
+                </h3>
+              </div>
             </div>
 
-            <div className="relative mx-auto grid w-full max-w-6xl grid-cols-2 gap-4 rounded-lg bg-background p-8 py-8 transition-all duration-300 hover:border hover:border-white ">
+            <div className="relative mx-auto grid w-full max-w-6xl grid-cols-2 gap-4 rounded-lg bg-background/50 p-8 py-8 transition-all duration-300 hover:border hover:border-white ">
               <div className="flex flex-col space-y-8">
                 <HomepageChat vanilla={true} />
                 <h3 className="whitespace-pre-wrap bg-gradient-to-b from-black to-gray-800/90 bg-clip-text text-center text-xl font-semibold leading-none tracking-tight text-transparent dark:from-white dark:to-slate-300/90">
