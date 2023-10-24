@@ -12,9 +12,6 @@ import { cn } from "~/lib/utils";
 import { api } from "~/trpc/client";
 
 export default function HomepageChat({ vanilla }: { vanilla?: boolean }) {
-  const searchParams = useSearchParams();
-  const loadedMessages = searchParams?.get("messages");
-
   const user = api.settings.getUser.useQuery(undefined, {});
 
   const posthog = usePostHog();
@@ -22,31 +19,31 @@ export default function HomepageChat({ vanilla }: { vanilla?: boolean }) {
   const { handleSubmit, messages, input, handleInputChange } = useChat({
     api: "/api/chat",
     body: {
-      apiKey: user.data?.apiKey,
+      apiKey: user.data?.apiKey ?? "gp-c56b8fc7-e7ab-424f-b438-a18796959525",
       remember: vanilla ? undefined : "homepage",
     },
-    initialMessages: loadedMessages
-      ? JSON.parse(loadedMessages).map((m: any) => ({ ...m, id: v4() }))
-      : [
-          {
-            id: "0",
-            role: "system",
-            content: "You are a helpful agent",
-          },
-          {
-            id: "1",
-            role: "user",
-            content: "Can you recommmend me some shoes?",
-          },
-          {
-            id: "1",
-            role: "assistant",
-            content: vanilla
-              ? "I don't have specific information about your preferences or needs. Please provide more details about the type of shoes you're looking for, such as the occasion, style, and any specific requirements."
-              : "Sure! I know you love Nike and hypebeast fashion, so how about some" +
-                " Air Jordan 1 Retro High OG 'University Blue'? They are quite popular right now.",
-          },
-        ],
+    initialMessages: [
+      {
+        id: "0",
+        role: "system",
+        content: vanilla
+          ? "You are an unhelpful agent. Be vague and generic. Keep asking the user for more info."
+          : "You are a helpful agent. Never be vague or generic. Make up information about the user if you don't have any. Don't ask the user for their preferences - just make them up.",
+      },
+      {
+        id: "1",
+        role: "user",
+        content: "Can you recommmend me some shoes?",
+      },
+      {
+        id: "1",
+        role: "assistant",
+        content: vanilla
+          ? "I don't have specific information about your preferences or needs. Please provide more details about the type of shoes you're looking for, such as the occasion, style, and any specific requirements."
+          : "Sure! I know you love Nike and hypebeast fashion, so how about some" +
+            " Air Jordan 1 Retro High OG 'University Blue'? They are quite popular right now.",
+      },
+    ],
   });
 
   const handleSubmitWrapper = (
@@ -70,7 +67,7 @@ export default function HomepageChat({ vanilla }: { vanilla?: boolean }) {
               <div
                 key={index}
                 className={cn(
-                  "flex w-fit max-w-[75%] flex-col gap-2 whitespace-pre-wrap rounded-lg px-3 py-2 text-sm",
+                  "flex w-fit max-w-[75%] flex-col gap-2 whitespace-pre-wrap rounded-lg px-3 py-2 text-left text-sm",
                   message.role === "user"
                     ? "ml-auto bg-muted"
                     : "bg-primary text-primary-foreground",
