@@ -84,12 +84,17 @@ export default function Hello() {
                 </svg>
                 Join our Discord
               </Link>
-              <Button
-                className="transition-all duration-300 hover:ring-2 hover:ring-primary hover:ring-offset-2"
-                variant="outline"
+              <Link
+                href="/dashboard"
+                className={cn(
+                  buttonVariants({
+                    variant: "outline",
+                  }),
+                  "transition-all duration-300 hover:ring-2 hover:ring-primary hover:ring-offset-2"
+                )}
               >
                 Get Started Now
-              </Button>
+              </Link>
             </div>
           </div>
           <div className="absolute bottom-0 h-px w-full bg-[radial-gradient(50%_100%_at_50%_100%,rgba(0,0,0,.12)_0%,rgba(255,255,255,0)_100%)] dark:bg-[radial-gradient(50%_100%_at_50%_100%,rgba(255,255,255,.32)_0%,rgba(255,255,255,0)_100%)]"></div>
