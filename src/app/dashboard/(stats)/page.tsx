@@ -19,8 +19,9 @@ import { api } from "~/trpc/client";
 import { Button } from "~/components/ui/button";
 import { Plus } from "lucide-react";
 import { Badge } from "~/components/ui/badge";
+import { Label } from "../../../components/ui/label";
 
-const models = ["gpt-3.5-turbo", "gpt-4"];
+export const models = ["gpt-4", "gpt-3.5-turbo"];
 
 type Interval = Parameters<
   typeof api.stats.getModelRequests.useQuery
@@ -95,8 +96,6 @@ function formatXAxis(
       return { ...newBucket, ...bucket } as Record<string, any>;
     });
 
-  console.log("Bins", bins);
-
   /** For each data point, find the closest bin and update the model values */
   // For each data point, find the closest bin and update the model values
   data.forEach((dataPoint) => {
@@ -112,8 +111,6 @@ function formatXAxis(
     bins.forEach((bin, index) => {
       // Calculate the absolute difference between the bin's datetime and the data point's time
       const diff = Math.abs(bin.datetime.getTime() - dataPointTime.getTime());
-
-      console.log("Comparing: ", bin.datetime, dataPointTime);
 
       // If this difference is smaller than the smallest difference we've seen so far
       if (diff < smallestDiff) {
@@ -134,8 +131,6 @@ function formatXAxis(
         dataPoint[model as keyof typeof dataPoint];
     });
   });
-
-  console.log("Bins", bins);
 
   return bins;
 }
@@ -210,7 +205,7 @@ export default function RequestsByModel() {
               stack={true}
               index="label"
               categories={models}
-              colors={Object.values(modelColors) as any}
+              colors={["yellow", "violet"]}
             />
           ) : (
             <Skeleton className="h-32 w-full rounded-md" />
@@ -218,7 +213,12 @@ export default function RequestsByModel() {
         </CardContent>
       </Card>
 
-      {table.data ? <DataTable columns={columns} data={table.data} /> : null}
+      {table.data ? (
+        <div className="mt-2 flex flex-col space-y-2">
+          <Label>Requests</Label>
+          <DataTable columns={columns} data={table.data} />
+        </div>
+      ) : null}
     </div>
   );
 }

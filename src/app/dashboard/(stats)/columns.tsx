@@ -1,22 +1,13 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "~/components/ui/badge";
-import type { RouterOutputs } from "~/trpc/client";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "~/components/ui/sheet";
-import { Button, buttonVariants } from "~/components/ui/button";
+import { ArrowLeftRight, ArrowRight, PlusIcon } from "lucide-react";
 import Link from "next/link";
 import OpenAI from "openai";
-import { cn } from "~/lib/utils";
+import colors from "tailwindcss/colors";
+import { Alert, AlertTitle } from "~/components/ui/alert";
+import { Badge } from "~/components/ui/badge";
+import { Button, buttonVariants } from "~/components/ui/button";
 import {
   Card,
   CardContent,
@@ -24,23 +15,47 @@ import {
   CardHeader,
 } from "~/components/ui/card";
 import { Separator } from "~/components/ui/separator";
-import colors from "tailwindcss/colors";
 import {
-  ArrowLeftRight,
-  ArrowRight,
-  MessagesSquare,
-  MinusIcon,
-  PlusIcon,
-} from "lucide-react";
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "~/components/ui/sheet";
+import { cn } from "~/lib/utils";
 import type { MemoryDiff } from "~/pages/api/openai/v1/chat/completions";
-import { Alert, AlertTitle } from "~/components/ui/alert";
+import type { RouterOutputs } from "~/trpc/client";
 
 type Rows = RouterOutputs["stats"]["getRequestsRaw"][0];
 type Message = OpenAI.Chat.Completions.ChatCompletionMessage;
 
-export const modelColors: { [key: string]: keyof typeof colors } = {
-  "gpt-3.5-turbo": "violet",
+type Models =
+  | "gpt-4"
+  | "gpt-4-0314"
+  | "gpt-4-0613"
+  | "gpt-4-32k"
+  | "gpt-4-32k-0314"
+  | "gpt-4-32k-0613"
+  | "gpt-3.5-turbo"
+  | "gpt-3.5-turbo-16k"
+  | "gpt-3.5-turbo-0301"
+  | "gpt-3.5-turbo-0613"
+  | "gpt-3.5-turbo-16k-0613";
+
+export const modelColors: {
+  [key in Models]: keyof typeof colors;
+} = {
   "gpt-4": "yellow",
+  "gpt-4-0314": "yellow",
+  "gpt-4-0613": "yellow",
+  "gpt-4-32k": "yellow",
+  "gpt-4-32k-0314": "yellow",
+  "gpt-4-32k-0613": "yellow",
+  "gpt-3.5-turbo": "violet",
+  "gpt-3.5-turbo-16k": "violet",
+  "gpt-3.5-turbo-0301": "violet",
+  "gpt-3.5-turbo-0613": "violet",
+  "gpt-3.5-turbo-16k-0613": "violet",
 };
 
 export const columns: ColumnDef<Rows>[] = [
@@ -48,7 +63,7 @@ export const columns: ColumnDef<Rows>[] = [
     header: "Model",
     accessorKey: "model",
     cell: ({ getValue }) => {
-      const model = getValue() as string;
+      const model = getValue() as Models;
       const color = modelColors[model] ?? "gray";
       return (
         <Badge
@@ -110,7 +125,7 @@ export const columns: ColumnDef<Rows>[] = [
     cell: ({ getValue }) => {
       const value: any = getValue() as Rows["response"];
       const message = value["choices"][0]["message"]["content"];
-      return message.slice(0, 30) + "...";
+      return (message ?? "").slice(0, 30) + "...";
     },
   },
   {
