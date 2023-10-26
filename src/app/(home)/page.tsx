@@ -110,9 +110,9 @@ export default function Hello() {
             </h1>
             <div className="flex max-w-6xl flex-col space-y-8">
               <p className="max-w-[36rem] text-center text-lg leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-                Add <b className="text-white">two lines</b> to your OpenAI call
+                Add <b className="dark:text-white text-black">two lines</b> to your OpenAI call
                 to automatically{" "}
-                <b className="text-white">personalize responses</b> based on
+                <b className="dark:text-white text-black">personalize responses</b> based on
                 past conversations or internal documents.
               </p>
 
