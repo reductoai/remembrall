@@ -1,9 +1,9 @@
 
 <a href="https://remembrall.dev"><img src="https://raw.githubusercontent.com/reductoai/images/main/GithubBanner.png"/></a>
 
-<center>
+
 <a href="https://discord.gg/YQSfu9TB"><img src="https://raw.githubusercontent.com/reductoai/images/main/discord_banner_purple.svg" /></a>
-</center>
+
 
 ## Overview
 Remembrall is a powerful API that enables long term memory for your LLM applications. Our platform allows you to enrich your existing LLM calls with key context from prior user chats and relevant documents – all with only two lines of code.
