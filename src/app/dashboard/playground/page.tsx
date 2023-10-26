@@ -24,27 +24,29 @@ import {
 import { usePostHog } from "posthog-js/react";
 import { ChatRequestOptions } from "ai";
 
+import { useQueryState } from "next-usequerystate";
+
 export default function Playground() {
   const searchParams = useSearchParams();
   const loadedMessages = searchParams?.get("messages");
 
   const contexts = api.vector.docContexts.useQuery();
 
-  const [session, setSession] = useState("");
-  const [history, setHistory] = useState(false);
-  const [context, setContext] = useState(false);
-  const [contextId, setContextId] = useState("");
+  const [session, setSession] = useQueryState("session");
+  const [context, setContext] = useQueryState("context");
+  const [history, setHistory] = useQueryState("remember");
+  const [contextId, setContextId] = useQueryState("contextId");
 
   const user = api.settings.getUser.useQuery(undefined, {
     onSuccess: (data) => {
       if (data.gh_username && session === "") {
         setSession(data.gh_username);
-        setHistory(true);
+        setHistory("true");
       }
 
       if (data.email && session === "") {
         setSession(data.email);
-        setHistory(true);
+        setHistory("true");
       }
     },
   });
@@ -86,13 +88,13 @@ export default function Playground() {
             <Label>Long Term Memory</Label>
             <div className="flex flex-row items-center space-x-2">
               <Switch
-                checked={history}
-                onCheckedChange={(c) => setHistory(c)}
+                checked={history === "true"}
+                onCheckedChange={(c) => setHistory(c ? "true" : null)}
               />
               <Input
                 placeholder="Session ID"
-                disabled={history === false}
-                value={session}
+                disabled={history !== "true"}
+                value={session ?? ""}
                 onChange={(e) => {
                   setSession(e.target.value);
                 }}
@@ -104,8 +106,8 @@ export default function Playground() {
             <Label>Document Contexts</Label>
             <div className="flex flex-row items-center space-x-2">
               <Switch
-                checked={context}
-                onCheckedChange={(c) => setContext(c)}
+                checked={context === "true"}
+                onCheckedChange={(c) => setContext(c ? "true" : null)}
               />
               <Select
                 disabled={!context}

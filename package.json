@@ -54,6 +54,7 @@
     "next": "13.5.2",
     "next-auth": "^4.22.1",
     "next-themes": "^0.2.1",
+    "next-usequerystate": "^1.8.4",
     "openai": "^4.0.0",
     "pdfjs-dist": "^3.10.111",
     "posthog-js": "^1.78.1",
