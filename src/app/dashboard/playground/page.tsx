@@ -39,12 +39,10 @@ export default function Playground() {
 
   const user = api.settings.getUser.useQuery(undefined, {
     onSuccess: (data) => {
-      if (data.gh_username && session === "") {
+      if (data.gh_username && !session) {
         setSession(data.gh_username);
         setHistory("true");
-      }
-
-      if (data.email && session === "") {
+      } else if (data.email && !session) {
         setSession(data.email);
         setHistory("true");
       }
