@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Request {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  model        String
+  createdAt    DateTime @default(now())
+  request      Json
+  response     Json
+  numTokens    Int
+  duration     Int
+  userId       String
+  memoryUpdate Json?
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Snippet {
+  id         String                @id @unique @default(dbgenerated("(concat('snp-', gen_random_uuid()))::TEXT"))
+  createdAt  DateTime              @default(now()) @db.Timestamptz(6)
+  content    String
+  userId     String                @db.Text
+  embedding  Unsupported("vector")
+  document   Document?             @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  documentId String?
+}
+
+model Document {
+  id        String          @id @default(cuid())
+  name      String
+  snippets  Snippet[]
+  content   String
+  contextId String
+  context   DocumentContext @relation(fields: [contextId], references: [id], onDelete: Cascade)
+}
+
+model DocumentContext {
+  id        String     @id @unique @default(dbgenerated("(concat('dc-', gen_random_uuid()))::TEXT"))
+  createdAt DateTime   @default(now()) @db.Timestamptz(6)
+  name      String
+  context   String     @default("Some information that may be relevant for this query:")
+  userId    String     @db.Text
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chunkSize Int
+  document  Document[]
+}
+
+model Memory {
+  id        String                @id @unique @default(dbgenerated("(concat('m-', gen_random_uuid()))::TEXT"))
+  content   String
+  userId    String
+  user      User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  storeId   String // a unique id for the memory store
+  updatedAt DateTime              @updatedAt
+  embedding Unsupported("vector")
+}
+
+enum Role {
+  assistant
+  user
+}
+
+model History {
+  id      String @id @unique @default(dbgenerated("gen_random_uuid()"))
+  content String
+  role    Role
+  storeId String
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id              String            @id @default(cuid())
+  name            String?
+  apiKey          String            @unique @default(dbgenerated("(concat('gp-', gen_random_uuid()))::TEXT"))
+  username        String?
+  gh_username     String?
+  email           String?           @unique
+  emailVerified   DateTime?
+  image           String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  accounts        Account[]
+  Request         Request[]
+  sessions        Session[]
+  DocumentContext DocumentContext[]
+  Memory          Memory[]
+  stripeId        String?
+  memoryPrompt    String?
+  subscription    Subscription?
+  History         History[]
+}
+
+enum Subscription {
+  incomplete
+  incomplete_expired
+  trialing
+  active
+  past_due
+  canceled
+  unpaid
+  paused
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  refresh_token_expires_in Int?
+  access_token             String?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  oauth_token_secret       String?
+  oauth_token              String?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
