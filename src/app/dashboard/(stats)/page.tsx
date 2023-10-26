@@ -21,7 +21,7 @@ import { Plus } from "lucide-react";
 import { Badge } from "~/components/ui/badge";
 import { Label } from "../../../components/ui/label";
 
-export const models = ["gpt-4", "gpt-3.5-turbo"];
+const models = ["gpt-4", "gpt-3.5-turbo"];
 
 type Interval = Parameters<
   typeof api.stats.getModelRequests.useQuery
